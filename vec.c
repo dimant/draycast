@@ -3,58 +3,73 @@
 
 #include "vec.h"
 
-vec vec_create(float x, float y, float z)
+vec vec_create(const float x, const float y, const float z)
 {
     vec v = {x, y, z};
     return v;
 }
 
-vec vec_add(vec a, vec b)
+vec vec_add(const vec a, const vec b)
 {
     vec v = {a.x + b.x, a.y + b.y, a.z + b.z};
     return v;
 }
 
-vec vec_sub(vec a, vec b)
+vec vec_sub(const vec a, const vec b)
 {
     vec v = {a.x - b.x, a.y - b.y, a.z - b.z};
     return v;
 }
 
-vec vec_mul(vec a, vec b)
+vec vec_mul(const vec a, const vec b)
 {
     vec v = {a.x * b.x, a.y * b.y, a.z * b.z};
     return v;
 }
 
-vec vec_mul_scalar(vec a, float scalar)
+vec vec_mul_scalar(const vec a, const float scalar)
 {
     vec v = {a.x * scalar, a.y * scalar, a.z * scalar};
     return v;
 }
 
-vec vec_div_scalar(vec a, float scalar)
+vec vec_div_scalar(const vec a, const float scalar)
 {
     vec v = {a.x / scalar, a.y / scalar, a.z / scalar};
     return v;
 }
 
-float vec_length(vec a)
+float vec_length(const vec a)
 {
     return sqrt(vec_squared(a));
 }
 
-float vec_squared(vec a)
+float vec_squared(const vec a)
 {
     return a.x * a.x + a.y * a.y + a.z * a.z;
 }
 
-float vec_dot(vec a, vec b)
+float vec_dot(const vec a, const vec b)
 {
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
-void vec_print(vec a)
+vec vec_cross(const vec a, const vec b)
+{
+    vec v = {
+        a.y * b.z - a.z * b.y,
+        a.z * b.x - a.x * b.z,
+        a.x * b.y - a.y * b.x};
+
+    return v;
+}
+
+vec vec_unit(const vec a)
+{
+    return vec_div_scalar(a, vec_length(a));
+}
+
+void vec_print(const vec a)
 {
     printf("(%f %f %f)\n", a.x, a.y, a.z);
 }

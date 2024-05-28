@@ -12,24 +12,28 @@ typedef struct vec_struct vec;
 
 #define VEC_ARR(v) ((float *)&v)
 
-vec vec_create(float x, float y, float z);
+vec vec_create(const float x, const float y, const float z);
 
-vec vec_add(vec a, vec b);
+vec vec_add(const vec a, const vec b);
 
-vec vec_sub(vec a, vec b);
+vec vec_sub(const vec a, const vec b);
 
-vec vec_mul(vec a, vec b);
+vec vec_mul(const vec a, const vec b);
 
-vec vec_mul_scalar(vec a, float scalar);
+vec vec_mul_scalar(const vec a, const float scalar);
 
-vec vec_div_scalar(vec a, float scalar);
+vec vec_div_scalar(const vec a, const float scalar);
 
-float vec_length(vec a);
+float vec_length(const vec a);
 
-float vec_squared(vec a);
+float vec_squared(const vec a);
 
-float vec_dot(vec a, vec b);
+float vec_dot(const vec a, const vec b);
 
-void vec_print(vec a);
+vec vec_cross(const vec a, const vec b);
+
+vec vec_unit(const vec a);
+
+void vec_print(const vec a);
 
 #endif // VEC_H
