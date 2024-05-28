@@ -63,7 +63,17 @@ void fill_test_image(image img)
 
 color ray_color(const ray r)
 {
-    return color_create(0, 0, 0);
+    vec unit_direction = vec_unit(r.direction);
+    // a = 0.5 * (unit_direction.y + 1.0)
+    num a = 0.5 * (unit_direction.y + 1.0);
+    color start = color_create(1.0, 1.0, 1.0);
+    color end = color_create(0.5, 0.7, 1.0);
+
+    vec start_v = vec_mul_scalar(COL_VEC(start), 1.0 - a);
+    vec end_v = vec_mul_scalar(COL_VEC(end), a);
+    vec result = vec_add(start_v, end_v);
+
+    return VEC_COL(result);
 }
 
 void render(image *img)
@@ -86,16 +96,20 @@ void render(image *img)
     vec pixel_delta_u = vec_div_scalar(viewport_u, image_width);
     vec pixel_delta_v = vec_div_scalar(viewport_v, image_height);
 
+    vec viewport_u_2 = vec_div_scalar(viewport_u, 2.0);
+    vec viewport_v_2 = vec_div_scalar(viewport_v, 2.0);
+
     point viewport_upper_left =
         vec_sub(
             vec_sub(
-                vec_sub(camera_center,
-                        vec_create(0.0, 0.0, focal_length)), // camera_center - focal_length
-                vec_div_scalar(viewport_u, 2.0)),            // - viewport_u / 2
-            vec_div_scalar(viewport_v, 2.0));                // - viewport_v / 2
+                vec_sub(camera_center, vec_create(0.0, 0.0, focal_length)), // camera_center - focal_length
+                viewport_u_2),                                              // - viewport_u / 2
+            viewport_v_2);                                                  // - viewport_v / 2
 
     // pixel_00_loc = viewport_upper_left + (pixel_delta_u + pixel_delta_v) / 2
-    point pixel_00_loc = vec_add(viewport_upper_left, vec_div_scalar(vec_add(pixel_delta_u, pixel_delta_v), 2.0));
+    vec pixel_delta_uv = vec_add(pixel_delta_u, pixel_delta_v);
+    vec pixel_delta_uv_2 = vec_div_scalar(pixel_delta_uv, 2.0);
+    point pixel_00_loc = vec_add(viewport_upper_left, pixel_delta_uv_2);
 
     // render
     img->width = image_width;
@@ -108,8 +122,8 @@ void render(image *img)
 
         for (int col = 0; col < image_width; col++)
         {
-            vec delta_u = vec_mul_scalar(pixel_delta_u, row);
-            vec delta_v = vec_mul_scalar(pixel_delta_v, col);
+            vec delta_u = vec_mul_scalar(pixel_delta_u, col);
+            vec delta_v = vec_mul_scalar(pixel_delta_v, row);
 
             // pixel_center = pixel_00_loc + row * pixel_delta_u + col * pixel_delta_v
             point pixel_center = vec_add(vec_add(pixel_00_loc, delta_u), delta_v);
