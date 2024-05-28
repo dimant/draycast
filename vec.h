@@ -10,6 +10,8 @@ struct vec_struct
 
 typedef struct vec_struct vec;
 
+typedef struct vec_struct point;
+
 #define VEC_ARR(v) ((float *)&v)
 
 vec vec_create(const float x, const float y, const float z);
