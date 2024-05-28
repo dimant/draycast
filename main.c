@@ -24,13 +24,8 @@ void write_ppm(
     fclose(file);
 }
 
-int main(int argc, char **argv)
+void fill_test_image(double *image, const unsigned int width, const unsigned int height)
 {
-    const unsigned int width = 256;
-    const unsigned int height = 256;
-
-    double image[width * height * 3];
-
     for (int row = 0; row < height; row++)
     {
         for (int col = 0; col < width; col++)
@@ -45,6 +40,16 @@ int main(int argc, char **argv)
             image[pixel * 3 + 2] = b;
         }
     }
+}
+
+int main(int argc, char **argv)
+{
+    const unsigned int width = 256;
+    const unsigned int height = 256;
+
+    double image[width * height * 3];
+
+    fill_test_image(image, width, height);
 
     write_ppm("image.ppm", image, width, height);
 
