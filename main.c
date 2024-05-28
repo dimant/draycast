@@ -6,12 +6,10 @@
 #include "color.h"
 #include "image.h"
 
-void write_ppm(
-    const char *fname,
+void ppm_write(
+    FILE *file,
     const image img)
 {
-    FILE *file = fopen(fname, "w");
-
     fprintf(file, "P3\n");
     fprintf(file, "%d %d\n", img.width, img.height);
     fprintf(file, "255\n");
@@ -68,7 +66,7 @@ color ray_color(const ray r)
     return color_create(0, 0, 0);
 }
 
-void render()
+void render(image *img)
 {
     num aspect_ratio = 16.0 / 9.0;
     int image_width = 400;
@@ -100,6 +98,9 @@ void render()
     point pixel_00_loc = vec_add(viewport_upper_left, vec_div_scalar(vec_add(pixel_delta_u, pixel_delta_v), 2.0));
 
     // render
+    img->width = image_width;
+    img->height = image_height;
+    img->pixels = (color *)malloc(image_width * image_height * sizeof(color));
 
     for (int row = 0; row < image_height; row++)
     {
@@ -113,20 +114,35 @@ void render()
             vec ray_direction = vec_sub(pixel_center, camera_center);
             ray r = ray_create(camera_center, ray_direction);
             color pixel_color = ray_color(r);
+
+            int pixel = row * image_width + col;
+            img->pixels[pixel] = pixel_color;
         }
     }
 }
 
-int main(int argc, char **argv)
+void render_test_image()
 {
     const unsigned int width = 256;
     const unsigned int height = 256;
+    FILE *file = fopen("image.ppm", "w");
 
     image img = image_create(width, height);
 
     fill_test_image(img);
 
-    write_ppm("image.ppm", img);
+    ppm_write(file, img);
+
+    image_free(img);
+}
+
+int main(int argc, char **argv)
+{
+    FILE *file = fopen("image.ppm", "w");
+    image img;
+
+    render(&img);
+    ppm_write(file, img);
 
     printf("\nDone!\n");
 
