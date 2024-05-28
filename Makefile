@@ -1,5 +1,5 @@
 # Define the compiler to use
-CC = gcc
+CC = g++
 
 # Define the compiler flags
 CFLAGS = -g
