@@ -1,6 +1,12 @@
-#include "col.h"
+#include "color.h"
 
-void col_write(FILE *file, const col c)
+color color_create(const num r, const num g, const num b)
+{
+    color c = {r, g, b};
+    return c;
+}
+
+void color_write(FILE *file, const color c)
 {
     int ir = (int)(((num)255.999) * c.r);
     int ig = (int)(((num)255.999) * c.g);
