@@ -14,11 +14,14 @@ void write_ppm(
 
     for (int pixel = 0; pixel < width * height; pixel++)
     {
-        for (int color = 0; color < 3; color++)
-        {
-            fprintf(file, "%f ", image[pixel * 3 + color]);
-        }
+        int ir = (int)255.999 * image[pixel * 3 + 0];
+        int ig = (int)255.999 * image[pixel * 3 + 1];
+        int ib = (int)255.999 * image[pixel * 3 + 2];
+
+        fprintf(file, "%d %d %d\n", ir, ig, ib);
     }
+
+    fclose(file);
 }
 
 int main(int argc, char **argv)
@@ -37,13 +40,9 @@ int main(int argc, char **argv)
             double g = (double)col / (height - 1);
             double b = 0.0;
 
-            int ir = (int)255.999 * r;
-            int ig = (int)255.999 * g;
-            int ib = (int)255.999 * b;
-
-            image[pixel * 3 + 0] = ir;
-            image[pixel * 3 + 1] = ig;
-            image[pixel * 3 + 2] = ib;
+            image[pixel * 3 + 0] = r;
+            image[pixel * 3 + 1] = g;
+            image[pixel * 3 + 2] = b;
         }
     }
 
