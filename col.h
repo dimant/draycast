@@ -1,6 +1,8 @@
 #ifndef COL_H
 #define COL_H
 
+#include <stdio.h>
+
 struct col_struct
 {
     float r;
@@ -12,6 +14,6 @@ typedef struct col_struct col;
 
 #define COL_ARR(c) ((float *)&c)
 
-void col_print(const col c);
+void col_write(FILE *file, const col c);
 
 #endif

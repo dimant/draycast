@@ -1,8 +1,10 @@
 #include <stdio.h>
 
+#include "col.h"
+
 void write_ppm(
     const char *fname,
-    const double *image,
+    const float *image,
     const unsigned int width,
     const unsigned int height)
 {
@@ -14,11 +16,8 @@ void write_ppm(
 
     for (int pixel = 0; pixel < width * height; pixel++)
     {
-        int ir = (int)255.999f * image[pixel * 3 + 0];
-        int ig = (int)255.999f * image[pixel * 3 + 1];
-        int ib = (int)255.999f * image[pixel * 3 + 2];
-
-        fprintf(file, "%d %d %d\n", ir, ig, ib);
+        col *color = (col *)&image[pixel * 3];
+        col_write(file, *color);
     }
 
     fclose(file);
@@ -44,7 +43,7 @@ void print_progress(const unsigned int progress, const unsigned int total)
     fflush(stdout);
 }
 
-void fill_test_image(double *image, const unsigned int width, const unsigned int height)
+void fill_test_image(float *image, const unsigned int width, const unsigned int height)
 {
     for (int row = 0; row < height; row++)
     {
@@ -68,7 +67,7 @@ int main(int argc, char **argv)
     const unsigned int width = 256;
     const unsigned int height = 256;
 
-    double image[width * height * 3];
+    float image[width * height * 3];
 
     fill_test_image(image, width, height);
 

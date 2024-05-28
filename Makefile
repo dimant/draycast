@@ -2,13 +2,13 @@
 CC = gcc
 
 # Define the compiler flags
-CFLAGS = -g
+CFLAGS = -g -lm
 
 # Define the target executable
 TARGET = draycast
 
 # Define the source files
-SRCS = main.c
+SRCS = main.c vec.c col.c
 
 # Define the object files
 OBJS = $(SRCS:.c=.o)
