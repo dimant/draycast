@@ -24,10 +24,31 @@ void write_ppm(
     fclose(file);
 }
 
+void print_progress(const unsigned int progress, const unsigned int total)
+{
+    const int barWidth = 70;
+    const float percentage = (float)progress / total;
+    const int pos = barWidth * percentage;
+
+    printf("[");
+    for (int i = 0; i < barWidth; ++i)
+    {
+        if (i < pos)
+            printf("=");
+        else if (i == pos)
+            printf(">");
+        else
+            printf(" ");
+    }
+    printf("] %d%%\r", (int)(percentage * 100));
+    fflush(stdout);
+}
+
 void fill_test_image(double *image, const unsigned int width, const unsigned int height)
 {
     for (int row = 0; row < height; row++)
     {
+        print_progress(row, height);
         for (int col = 0; col < width; col++)
         {
             int pixel = row * width + col;
@@ -52,6 +73,10 @@ int main(int argc, char **argv)
     fill_test_image(image, width, height);
 
     write_ppm("image.ppm", image, width, height);
+
+    printf("\nDone!\n");
+
+    fflush(stdout);
 
     return 0;
 }
