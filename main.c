@@ -14,9 +14,9 @@ void write_ppm(
 
     for (int pixel = 0; pixel < width * height; pixel++)
     {
-        int ir = (int)255.999 * image[pixel * 3 + 0];
-        int ig = (int)255.999 * image[pixel * 3 + 1];
-        int ib = (int)255.999 * image[pixel * 3 + 2];
+        int ir = (int)255.999f * image[pixel * 3 + 0];
+        int ig = (int)255.999f * image[pixel * 3 + 1];
+        int ib = (int)255.999f * image[pixel * 3 + 2];
 
         fprintf(file, "%d %d %d\n", ir, ig, ib);
     }
