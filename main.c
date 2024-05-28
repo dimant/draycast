@@ -104,6 +104,8 @@ void render(image *img)
 
     for (int row = 0; row < image_height; row++)
     {
+        print_progress(row, image_height);
+
         for (int col = 0; col < image_width; col++)
         {
             vec delta_u = vec_mul_scalar(pixel_delta_u, row);
