@@ -2,9 +2,9 @@
 
 void col_write(FILE *file, const col c)
 {
-    int ir = (int)(255.999f * c.r);
-    int ig = (int)(255.999f * c.g);
-    int ib = (int)(255.999f * c.b);
+    int ir = (int)(((num)255.999) * c.r);
+    int ig = (int)(((num)255.999) * c.g);
+    int ib = (int)(((num)255.999) * c.b);
 
     fprintf(file, "%d %d %d\n", ir, ig, ib);
 }

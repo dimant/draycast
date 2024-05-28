@@ -3,7 +3,7 @@
 
 #include "vec.h"
 
-vec vec_create(const float x, const float y, const float z)
+vec vec_create(const num x, const num y, const num z)
 {
     vec v = {x, y, z};
     return v;
@@ -27,29 +27,29 @@ vec vec_mul(const vec a, const vec b)
     return v;
 }
 
-vec vec_mul_scalar(const vec a, const float scalar)
+vec vec_mul_scalar(const vec a, const num scalar)
 {
     vec v = {a.x * scalar, a.y * scalar, a.z * scalar};
     return v;
 }
 
-vec vec_div_scalar(const vec a, const float scalar)
+vec vec_div_scalar(const vec a, const num scalar)
 {
     vec v = {a.x / scalar, a.y / scalar, a.z / scalar};
     return v;
 }
 
-float vec_length(const vec a)
+num vec_length(const vec a)
 {
     return sqrt(vec_squared(a));
 }
 
-float vec_squared(const vec a)
+num vec_squared(const vec a)
 {
     return a.x * a.x + a.y * a.y + a.z * a.z;
 }
 
-float vec_dot(const vec a, const vec b)
+num vec_dot(const vec a, const vec b)
 {
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }

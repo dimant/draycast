@@ -3,16 +3,18 @@
 
 #include <stdio.h>
 
+#include "num.h"
+
 struct col_struct
 {
-    float r;
-    float g;
-    float b;
+    num r;
+    num g;
+    num b;
 };
 
 typedef struct col_struct col;
 
-#define COL_ARR(c) ((float *)&c)
+#define COL_ARR(c) ((num *)&c)
 
 void col_write(FILE *file, const col c);
 

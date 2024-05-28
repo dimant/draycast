@@ -1,10 +1,11 @@
 #include <stdio.h>
 
+#include "num.h"
 #include "col.h"
 
 void write_ppm(
     const char *fname,
-    const float *image,
+    const num *image,
     const unsigned int width,
     const unsigned int height)
 {
@@ -26,7 +27,7 @@ void write_ppm(
 void print_progress(const unsigned int progress, const unsigned int total)
 {
     const int barWidth = 70;
-    const float percentage = (float)progress / total;
+    const num percentage = (num)progress / total;
     const int pos = barWidth * percentage;
 
     printf("[");
@@ -43,7 +44,7 @@ void print_progress(const unsigned int progress, const unsigned int total)
     fflush(stdout);
 }
 
-void fill_test_image(float *image, const unsigned int width, const unsigned int height)
+void fill_test_image(num *image, const unsigned int width, const unsigned int height)
 {
     for (int row = 0; row < height; row++)
     {
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
     const unsigned int width = 256;
     const unsigned int height = 256;
 
-    float image[width * height * 3];
+    num image[width * height * 3];
 
     fill_test_image(image, width, height);
 

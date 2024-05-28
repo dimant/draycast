@@ -1,20 +1,22 @@
 #ifndef VEC_H
 #define VEC_H
 
+#include "num.h"
+
 struct vec_struct
 {
-    float x;
-    float y;
-    float z;
+    num x;
+    num y;
+    num z;
 };
 
 typedef struct vec_struct vec;
 
 typedef struct vec_struct point;
 
-#define VEC_ARR(v) ((float *)&v)
+#define VEC_ARR(v) ((num *)&v)
 
-vec vec_create(const float x, const float y, const float z);
+vec vec_create(const num x, const num y, const num z);
 
 vec vec_add(const vec a, const vec b);
 
@@ -22,15 +24,15 @@ vec vec_sub(const vec a, const vec b);
 
 vec vec_mul(const vec a, const vec b);
 
-vec vec_mul_scalar(const vec a, const float scalar);
+vec vec_mul_scalar(const vec a, const num scalar);
 
-vec vec_div_scalar(const vec a, const float scalar);
+vec vec_div_scalar(const vec a, const num scalar);
 
-float vec_length(const vec a);
+num vec_length(const vec a);
 
-float vec_squared(const vec a);
+num vec_squared(const vec a);
 
-float vec_dot(const vec a, const vec b);
+num vec_dot(const vec a, const vec b);
 
 vec vec_cross(const vec a, const vec b);
 
