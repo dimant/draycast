@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #include "num.h"
 #include "vec.h"
@@ -61,24 +62,39 @@ void fill_test_image(image img)
     }
 }
 
-char hit_sphere(const point center, const num radius, const ray r)
+num hit_sphere(const point center, const num radius, const ray r)
 {
     const vec oc = vec_sub(center, r.origin);
     const num a = vec_dot(r.direction, r.direction);
-    const num b = ((num)-2.0) * vec_dot(r.direction, oc);
+    const num b = -2.0 * vec_dot(r.direction, oc);
     const num c = vec_dot(oc, oc) - radius * radius;
-    const num discriminant = b * b - 4 * a * c;
+    const num discriminant = b * b - 4.0 * a * c;
 
-    return discriminant >= 0;
+    if (discriminant < 0.0)
+    {
+        return -1.0;
+    }
+    else
+    {
+        return (-b - sqrt(discriminant)) / (2.0 * a);
+    }
 }
 
 color ray_color(const ray r)
 {
     const point sphere_center = vec_create(0.0, 0.0, -1.0);
     const num sphere_radius = 0.5;
-    if (hit_sphere(sphere_center, sphere_radius, r))
+    const num t = hit_sphere(sphere_center, sphere_radius, r);
+    if (t > 0.0)
     {
-        return color_create(1.0, 0.0, 0.0);
+        const vec p = ray_point_at(r, t);
+        const vec d = vec_sub(p, sphere_center);
+        const vec n = vec_unit(d);
+
+        return color_create(
+            (n.x + 1.0) / 2.0,
+            (n.y + 1.0) / 2.0,
+            (n.z + 1.0) / 2.0);
     }
 
     const vec unit_direction = vec_unit(r.direction);
