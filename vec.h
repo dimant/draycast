@@ -30,7 +30,7 @@ vec vec_div_scalar(const vec a, const num scalar);
 
 num vec_length(const vec a);
 
-num vec_squared(const vec a);
+num vec_length_squared(const vec a);
 
 num vec_dot(const vec a, const vec b);
 

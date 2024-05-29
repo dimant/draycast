@@ -41,10 +41,10 @@ vec vec_div_scalar(const vec a, const num scalar)
 
 num vec_length(const vec a)
 {
-    return sqrt(vec_squared(a));
+    return sqrt(vec_length_squared(a));
 }
 
-num vec_squared(const vec a)
+num vec_length_squared(const vec a)
 {
     return a.x * a.x + a.y * a.y + a.z * a.z;
 }

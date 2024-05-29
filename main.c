@@ -65,10 +65,10 @@ void fill_test_image(image img)
 num hit_sphere(const point center, const num radius, const ray r)
 {
     const vec oc = vec_sub(center, r.origin);
-    const num a = vec_dot(r.direction, r.direction);
-    const num b = -2.0 * vec_dot(r.direction, oc);
-    const num c = vec_dot(oc, oc) - radius * radius;
-    const num discriminant = b * b - 4.0 * a * c;
+    const num a = vec_length_squared(r.direction);
+    const num h = vec_dot(r.direction, oc);
+    const num c = vec_length_squared(oc) - radius * radius;
+    const num discriminant = h * h - a * c;
 
     if (discriminant < 0.0)
     {
@@ -76,7 +76,7 @@ num hit_sphere(const point center, const num radius, const ray r)
     }
     else
     {
-        return (-b - sqrt(discriminant)) / (2.0 * a);
+        return (h - sqrt(discriminant)) / a;
     }
 }
 
@@ -98,7 +98,6 @@ color ray_color(const ray r)
     }
 
     const vec unit_direction = vec_unit(r.direction);
-    // a = 0.5 * (unit_direction.y + 1.0)
     const num a = 0.5 * (unit_direction.y + 1.0);
     const color start = color_create(1.0, 1.0, 1.0);
     const color end = color_create(0.5, 0.7, 1.0);
