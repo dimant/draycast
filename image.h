@@ -14,15 +14,8 @@ struct image_struct
 
 typedef struct image_struct image;
 
-image image_create(const unsigned int width, const unsigned int height)
-{
-    image i = {width, height, (color *)malloc(width * height * sizeof(color))};
-    return i;
-}
+image image_create(const unsigned int width, const unsigned int height);
 
-void image_free(image i)
-{
-    free(i.pixels);
-}
+void image_free(image i);
 
 #endif

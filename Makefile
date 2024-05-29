@@ -8,7 +8,7 @@ CFLAGS = -g -lm
 TARGET = draycast
 
 # Define the source files
-SRCS = main.c vec.c color.c ray.c
+SRCS = main.c vec.c color.c ray.c util.c
 
 # Define the object files
 OBJS = $(SRCS:.c=.o)
