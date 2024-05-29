@@ -61,17 +61,35 @@ void fill_test_image(image img)
     }
 }
 
+char hit_sphere(const point center, const num radius, const ray r)
+{
+    const vec oc = vec_sub(center, r.origin);
+    const num a = vec_dot(r.direction, r.direction);
+    const num b = ((num)-2.0) * vec_dot(r.direction, oc);
+    const num c = vec_dot(oc, oc) - radius * radius;
+    const num discriminant = b * b - 4 * a * c;
+
+    return discriminant >= 0;
+}
+
 color ray_color(const ray r)
 {
-    vec unit_direction = vec_unit(r.direction);
-    // a = 0.5 * (unit_direction.y + 1.0)
-    num a = 0.5 * (unit_direction.y + 1.0);
-    color start = color_create(1.0, 1.0, 1.0);
-    color end = color_create(0.5, 0.7, 1.0);
+    const point sphere_center = vec_create(0.0, 0.0, -1.0);
+    const num sphere_radius = 0.5;
+    if (hit_sphere(sphere_center, sphere_radius, r))
+    {
+        return color_create(1.0, 0.0, 0.0);
+    }
 
-    vec start_v = vec_mul_scalar(COL_VEC(start), 1.0 - a);
-    vec end_v = vec_mul_scalar(COL_VEC(end), a);
-    vec result = vec_add(start_v, end_v);
+    const vec unit_direction = vec_unit(r.direction);
+    // a = 0.5 * (unit_direction.y + 1.0)
+    const num a = 0.5 * (unit_direction.y + 1.0);
+    const color start = color_create(1.0, 1.0, 1.0);
+    const color end = color_create(0.5, 0.7, 1.0);
+
+    const vec start_v = vec_mul_scalar(COL_VEC(start), 1.0 - a);
+    const vec end_v = vec_mul_scalar(COL_VEC(end), a);
+    const vec result = vec_add(start_v, end_v);
 
     return VEC_COL(result);
 }
@@ -122,14 +140,14 @@ void render(image *img)
 
         for (int col = 0; col < image_width; col++)
         {
-            vec delta_u = vec_mul_scalar(pixel_delta_u, col);
-            vec delta_v = vec_mul_scalar(pixel_delta_v, row);
+            const vec delta_u = vec_mul_scalar(pixel_delta_u, col);
+            const vec delta_v = vec_mul_scalar(pixel_delta_v, row);
 
             // pixel_center = pixel_00_loc + row * pixel_delta_u + col * pixel_delta_v
-            point pixel_center = vec_add(vec_add(pixel_00_loc, delta_u), delta_v);
-            vec ray_direction = vec_sub(pixel_center, camera_center);
-            ray r = ray_create(camera_center, ray_direction);
-            color pixel_color = ray_color(r);
+            const point pixel_center = vec_add(vec_add(pixel_00_loc, delta_u), delta_v);
+            const vec ray_direction = vec_sub(pixel_center, camera_center);
+            const ray r = ray_create(camera_center, ray_direction);
+            const color pixel_color = ray_color(r);
 
             int pixel = row * image_width + col;
             img->pixels[pixel] = pixel_color;
