@@ -104,3 +104,10 @@ TEST(vector_norm_test)
 	ASSERT_FLOAT_EQ(1.0, vector_mag(c));
 	ASSERT_FLOAT_EQ(1.0, vector_mag(vector_norm(a)));
 }
+
+TEST(vector_dot_test)
+{
+	tuple a = new_vector(1.0, 2.0, 3.0);
+	tuple b = new_vector(2.0, 3.0, 4.0);
+	ASSERT_FLOAT_EQ(20.0, vector_dot(a, b));
+}

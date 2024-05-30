@@ -40,4 +40,6 @@ num vector_mag(tuple a);
 
 tuple vector_norm(tuple a);
 
+num vector_dot(tuple a, tuple b);
+
 #endif

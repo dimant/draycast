@@ -58,3 +58,7 @@ tuple vector_norm(tuple a) {
     num mag = vector_mag(a);
     return tuple_div_scalar(a, mag);
 }
+
+num vector_dot(tuple a, tuple b) {
+    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+}
