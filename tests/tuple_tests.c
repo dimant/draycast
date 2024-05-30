@@ -85,3 +85,13 @@ TEST(tuple_div_scalar_test)
 	expected.w = 0.5;
     ASSERT_TRUE(tuple_eq(b, expected));
 }
+
+TEST(tuple_len_test)
+{
+	tuple a = new_vector(1.0, 0.0, 0.0);
+	tuple b = new_vector(0.0, 1.0, 0.0);
+	tuple c = new_vector(0.0, 0.0, 1.0);
+	ASSERT_EQ(1.0, tuple_len(a));
+	ASSERT_EQ(1.0, tuple_len(b));
+	ASSERT_EQ(1.0, tuple_len(c));
+}

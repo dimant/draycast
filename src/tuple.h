@@ -36,4 +36,6 @@ tuple tuple_mul_scalar(tuple a, num b);
 
 tuple tuple_div_scalar(tuple a, num b);
 
+num tuple_len(tuple a);
+
 #endif
