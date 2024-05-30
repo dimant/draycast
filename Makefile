@@ -36,6 +36,6 @@ $(TEST_TARGET): $(OBJS) $(TEST_OBJS) tests/main.o
 
 # Clean up the generated files
 clean:
-	rm -f $(OBJS) $(TEST_OBJS) src/main.o tests/main.o $(TARGET)
+	rm -f $(OBJS) $(TEST_OBJS) src/main.o tests/main.o $(TARGET) $(TEST_TARGET)
 
 .PHONY: all clean
