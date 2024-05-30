@@ -40,6 +40,10 @@ num vector_mag(tuple a);
 
 tuple vector_norm(tuple a);
 
+// dot product of 1 means vectors are same
+// dot product of 0 means vectors are orthogonal
+// dot product of -1 means vectors are opposite
+// dot product is also cosign of angle between vectors
 num vector_dot(tuple a, tuple b);
 
 #endif
