@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+#define EPSILON 0.00001
+
 typedef float num;
 
 typedef struct {
@@ -19,5 +21,9 @@ tuple new_vector(num x, num y, num z);
 bool is_point(tuple t);
 
 bool is_vector(tuple t);
+
+bool num_eq(num a, num b);
+
+bool tuple_eq(tuple a, tuple b);
 
 #endif

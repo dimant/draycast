@@ -23,3 +23,18 @@ TEST(is_vector_test)
     ASSERT_FALSE(is_point(v));
     ASSERT_TRUE(is_vector(v));
 }
+
+TEST(num_eq_test)
+{
+	ASSERT_TRUE(num_eq(1.0, 1.0));
+	ASSERT_FALSE(num_eq(1.0, 1.1));
+}
+
+TEST(tuple_eq_test)
+{
+    tuple a = new_point(1.0, 2.0, 3.0);
+    tuple b = new_point(1.0, 2.0, 3.0);
+    ASSERT_TRUE(tuple_eq(a, b));
+    b = new_point(1.0, 2.0, 3.1);
+    ASSERT_FALSE(tuple_eq(a, b));
+}
