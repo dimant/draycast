@@ -68,3 +68,20 @@ TEST(tuple_neg_test)
     ASSERT_TRUE(tuple_eq(b, expected));
 }
 
+TEST(tuple_mul_scalar_test)
+{
+    tuple a = new_point(1.0, -2.0, 3.0);
+    tuple b = tuple_mul_scalar(a, 3.5);
+    tuple expected = new_point(3.5, -7.0, 10.5);
+	expected.w = 3.5;
+    ASSERT_TRUE(tuple_eq(b, expected));
+}
+
+TEST(tuple_div_scalar_test)
+{
+    tuple a = new_point(1.0, -2.0, 3.0);
+    tuple b = tuple_div_scalar(a, 2.0);
+    tuple expected = new_point(0.5, -1.0, 1.5);
+	expected.w = 0.5;
+    ASSERT_TRUE(tuple_eq(b, expected));
+}

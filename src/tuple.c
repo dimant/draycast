@@ -42,3 +42,11 @@ tuple tuple_neg(tuple a) {
     return tuple_new(-a.x, -a.y, -a.z, -a.w);
 }
 
+tuple tuple_mul_scalar(tuple a, num b) {
+    return tuple_new(a.x * b, a.y * b, a.z * b, a.w * b);
+}
+
+tuple tuple_div_scalar(tuple a, num b) {
+    return tuple_new(a.x / b, a.y / b, a.z / b, a.w / b);
+}
+

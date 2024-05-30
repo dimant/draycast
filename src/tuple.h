@@ -32,4 +32,8 @@ tuple tuple_sub(tuple a, tuple b);
 
 tuple tuple_neg(tuple a);
 
+tuple tuple_mul_scalar(tuple a, num b);
+
+tuple tuple_div_scalar(tuple a, num b);
+
 #endif
