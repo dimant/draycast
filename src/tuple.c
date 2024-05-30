@@ -10,15 +10,19 @@ tuple new_point(num x, num y, num z) {
 	return tuple_new(x, y, z, 1.0);
 }
 
-tuple new_vector(num x, num y, num z) {
+tuple new_vec(num x, num y, num z) {
 	return tuple_new(x, y, z, 0.0);
+}
+
+color new_color(num r, num g, num b) {
+	return tuple_new(r, g, b, 0.0);
 }
 
 bool is_point(tuple t) {
     return t.w == 1.0;
 }
 
-bool is_vector(tuple t) {
+bool is_vec(tuple t) {
     return t.w == 0.0;
 }
 
@@ -50,22 +54,26 @@ tuple tuple_div_scalar(tuple a, num b) {
     return tuple_new(a.x / b, a.y / b, a.z / b, a.w / b);
 }
 
-num vector_mag(tuple a) {
+num vec_mag(vec a) {
     return sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
 }
 
-tuple vector_norm(tuple a) {
-    num mag = vector_mag(a);
+vec vec_norm(vec a) {
+    num mag = vec_mag(a);
     return tuple_div_scalar(a, mag);
 }
 
-num vector_dot(tuple a, tuple b) {
+num vec_dot(vec a, vec b) {
     return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
 
-tuple vector_cross(tuple a, tuple b) {
-    return new_vector(
+vec vec_cross(vec a, vec b) {
+    return new_vec(
 		a.y * b.z - a.z * b.y,
 		a.z * b.x - a.x * b.z,
 		a.x * b.y - a.y * b.x);
+}
+
+color color_mul(color a, color b) {
+	return tuple_new(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
 }

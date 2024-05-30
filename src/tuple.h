@@ -14,13 +14,22 @@ typedef struct {
 	num w;
 } tuple;
 
+
+typedef tuple point;
+
+typedef tuple vec;
+
+typedef tuple color;
+
 tuple new_point(num x, num y, num z);
 
-tuple new_vector(num x, num y, num z);
+tuple new_vec(num x, num y, num z);
+
+tuple new_color(num x, num y, num z);
 
 bool is_point(tuple t);
 
-bool is_vector(tuple t);
+bool is_vec(tuple t);
 
 bool num_eq(num a, num b);
 
@@ -36,17 +45,20 @@ tuple tuple_mul_scalar(tuple a, num b);
 
 tuple tuple_div_scalar(tuple a, num b);
 
-num vector_mag(tuple a);
+num vec_mag(vec a);
 
-tuple vector_norm(tuple a);
+vec vec_norm(vec a);
 
 // dot product of 1 means vectors are same
 // dot product of 0 means vectors are orthogonal
 // dot product of -1 means vectors are opposite
 // dot product is also cosign of angle between vectors
-num vector_dot(tuple a, tuple b);
+num vec_dot(vec a, vec b);
 
 // cross product of two vectors is a vector that is orthogonal to both
-tuple vector_cross(tuple a, tuple b);
+vec vec_cross(vec a, vec b);
+
+// color multiplication is hadamard or shur product
+color color_mul(color a, color b);
 
 #endif
