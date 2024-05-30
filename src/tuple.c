@@ -50,6 +50,11 @@ tuple tuple_div_scalar(tuple a, num b) {
     return tuple_new(a.x / b, a.y / b, a.z / b, a.w / b);
 }
 
-num tuple_len(tuple a) {
+num vector_mag(tuple a) {
     return sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
+}
+
+tuple vector_norm(tuple a) {
+    num mag = vector_mag(a);
+    return tuple_div_scalar(a, mag);
 }

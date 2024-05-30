@@ -86,12 +86,21 @@ TEST(tuple_div_scalar_test)
     ASSERT_TRUE(tuple_eq(b, expected));
 }
 
-TEST(tuple_len_test)
+TEST(vector_mag_test)
 {
 	tuple a = new_vector(1.0, 0.0, 0.0);
 	tuple b = new_vector(0.0, 1.0, 0.0);
 	tuple c = new_vector(0.0, 0.0, 1.0);
-	ASSERT_EQ(1.0, tuple_len(a));
-	ASSERT_EQ(1.0, tuple_len(b));
-	ASSERT_EQ(1.0, tuple_len(c));
+	ASSERT_FLOAT_EQ(1.0, vector_mag(a));
+	ASSERT_FLOAT_EQ(1.0, vector_mag(b));
+	ASSERT_FLOAT_EQ(1.0, vector_mag(c));
+}
+
+TEST(vector_norm_test)
+{
+	tuple a = new_vector(4.0, 0.0, 0.0);
+	tuple b = new_vector(1.0, 2.0, 3.0);
+	tuple c = vector_norm(b);
+	ASSERT_FLOAT_EQ(1.0, vector_mag(c));
+	ASSERT_FLOAT_EQ(1.0, vector_mag(vector_norm(a)));
 }
