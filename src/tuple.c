@@ -62,3 +62,10 @@ tuple vector_norm(tuple a) {
 num vector_dot(tuple a, tuple b) {
     return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
+
+tuple vector_cross(tuple a, tuple b) {
+    return new_vector(
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x);
+}

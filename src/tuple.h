@@ -46,4 +46,7 @@ tuple vector_norm(tuple a);
 // dot product is also cosign of angle between vectors
 num vector_dot(tuple a, tuple b);
 
+// cross product of two vectors is a vector that is orthogonal to both
+tuple vector_cross(tuple a, tuple b);
+
 #endif

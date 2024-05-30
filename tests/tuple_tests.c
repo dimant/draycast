@@ -111,3 +111,16 @@ TEST(vector_dot_test)
 	tuple b = new_vector(2.0, 3.0, 4.0);
 	ASSERT_FLOAT_EQ(20.0, vector_dot(a, b));
 }
+
+TEST(vector_cross_test)
+{
+	tuple a = new_vector(1.0, 2.0, 3.0);
+	tuple b = new_vector(2.0, 3.0, 4.0);
+	tuple actual1 = vector_cross(a, b);
+	tuple expected1 = new_vector(-1.0, 2.0, -1.0);
+	ASSERT_TRUE(tuple_eq(actual1, expected1));
+
+	tuple actual2 = vector_cross(b, a);
+	tuple expected2 = new_vector(1.0, -2.0, 1.0);
+	ASSERT_TRUE(tuple_eq(actual2, expected2));
+}
