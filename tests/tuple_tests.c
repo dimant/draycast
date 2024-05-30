@@ -46,6 +46,7 @@ TEST(tuple_add_test)
     tuple c = tuple_add(a, b);
     tuple expected = new_point(1.0, 1.0, 6.0);
     ASSERT_TRUE(tuple_eq(c, expected));
+	ASSERT_TRUE(is_point(c));
 }
 
 TEST(tuple_sub_test)
@@ -55,6 +56,7 @@ TEST(tuple_sub_test)
     tuple c = tuple_sub(a, b);
     tuple expected = new_vector(-2.0, -4.0, -6.0);
     ASSERT_TRUE(tuple_eq(c, expected));
+	ASSERT_TRUE(is_vector(c));
 }
 
 TEST(tuple_neg_test)
@@ -62,6 +64,7 @@ TEST(tuple_neg_test)
     tuple a = new_point(1.0, -2.0, 3.0);
     tuple b = tuple_neg(a);
     tuple expected = new_point(-1.0, 2.0, -3.0);
+	expected.w = -expected.w;
     ASSERT_TRUE(tuple_eq(b, expected));
 }
 

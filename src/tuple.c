@@ -39,6 +39,6 @@ tuple tuple_sub(tuple a, tuple b) {
 }
 
 tuple tuple_neg(tuple a) {
-    return tuple_new(-a.x, -a.y, -a.z, a.w);
+    return tuple_new(-a.x, -a.y, -a.z, -a.w);
 }
 
