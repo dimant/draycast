@@ -40,13 +40,13 @@ extern int test_count;
 
 #define ASSERT_TRUE(expr) \
     if (!(expr)) { \
-		printf("\033[31mFAILED:\033[0m %s:%d %s: expected true, got true\n", __FILE__, __LINE__, __func__); \
+		printf("\033[31mFAILED:\033[0m %s:%d %s: expected true, got false\n", __FILE__, __LINE__, __func__); \
 		return true; \
     }
 
 #define ASSERT_FALSE(expr) \
     if (expr) { \
-		printf("\033[31mFAILED:\033[0m %s:%d %s: expected true, got true\n", __FILE__, __LINE__, __func__); \
+		printf("\033[31mFAILED:\033[0m %s:%d %s: expected false, got true\n", __FILE__, __LINE__, __func__); \
 		return true; \
     }
 

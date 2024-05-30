@@ -26,4 +26,10 @@ bool num_eq(num a, num b);
 
 bool tuple_eq(tuple a, tuple b);
 
+tuple tuple_add(tuple a, tuple b);
+
+tuple tuple_sub(tuple a, tuple b);
+
+tuple tuple_neg(tuple a);
+
 #endif

@@ -38,3 +38,30 @@ TEST(tuple_eq_test)
     b = new_point(1.0, 2.0, 3.1);
     ASSERT_FALSE(tuple_eq(a, b));
 }
+
+TEST(tuple_add_test)
+{
+    tuple a = new_point(3.0, -2.0, 5.0);
+    tuple b = new_vector(-2.0, 3.0, 1.0);
+    tuple c = tuple_add(a, b);
+    tuple expected = new_point(1.0, 1.0, 6.0);
+    ASSERT_TRUE(tuple_eq(c, expected));
+}
+
+TEST(tuple_sub_test)
+{
+    tuple a = new_point(3.0, 2.0, 1.0);
+    tuple b = new_point(5.0, 6.0, 7.0);
+    tuple c = tuple_sub(a, b);
+    tuple expected = new_vector(-2.0, -4.0, -6.0);
+    ASSERT_TRUE(tuple_eq(c, expected));
+}
+
+TEST(tuple_neg_test)
+{
+    tuple a = new_point(1.0, -2.0, 3.0);
+    tuple b = tuple_neg(a);
+    tuple expected = new_point(-1.0, 2.0, -3.0);
+    ASSERT_TRUE(tuple_eq(b, expected));
+}
+

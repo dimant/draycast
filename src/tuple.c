@@ -22,10 +22,23 @@ bool is_vector(tuple t) {
     return t.w == 0.0;
 }
 
-bool num_eq(num a, num b) {
+inline bool num_eq(num a, num b) {
     return fabs(a - b) < EPSILON;
 }
 
 bool tuple_eq(tuple a, tuple b) {
     return num_eq(a.x, b.x) && num_eq(a.y, b.y) && num_eq(a.z, b.z) && num_eq(a.w, b.w);
 }
+
+tuple tuple_add(tuple a, tuple b) {
+    return tuple_new(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+}
+
+tuple tuple_sub(tuple a, tuple b) {
+    return tuple_new(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+}
+
+tuple tuple_neg(tuple a) {
+    return tuple_new(-a.x, -a.y, -a.z, a.w);
+}
+
