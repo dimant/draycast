@@ -6,19 +6,29 @@ CFLAGS = -g -lm
 
 # Define the target executable
 TARGET = draycast
+TEST_TARGET = testme
 
 # Define the source files
-SRCS = main.c vec.c color.c ray.c util.c
+SRCS = src/tuple.c
+
+TEST_SRCS = tests/tuple_tests.c
 
 # Define the object files
 OBJS = $(SRCS:.c=.o)
+TEST_OBJS = $(TEST_SRCS:.c=.o)
 
 # Default target to build the program
 all: $(TARGET)
 
+test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
 # Rule to build the target executable
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+$(TARGET): $(OBJS) src/main.o
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) src/main.o
+
+$(TEST_TARGET): $(OBJS) $(TEST_OBJS) tests/main.o
+	$(CC) $(CFLAGS) -o $(TEST_TARGET) $(OBJS) $(TEST_OBJS) tests/main.o
 
 # Rule to compile the source files into object files
 %.o: %.c
@@ -26,6 +36,6 @@ $(TARGET): $(OBJS)
 
 # Clean up the generated files
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TEST_OBJS) src/main.o tests/main.o $(TARGET)
 
 .PHONY: all clean
