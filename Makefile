@@ -9,9 +9,9 @@ TARGET = draycast
 TEST_TARGET = testme
 
 # Define the source files
-SRCS = src/tuple.c
+SRCS = src/tuple.c src/canvas.c
 
-TEST_SRCS = tests/tuple_tests.c
+TEST_SRCS = tests/tuple_tests.c tests/canvas_tests.c
 
 # Define the object files
 OBJS = $(SRCS:.c=.o)
