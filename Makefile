@@ -9,7 +9,8 @@ TARGET = draycast
 TEST_TARGET = testme
 
 # Define the source files
-SRCS = src/tuple.c src/canvas.c src/ppm.c
+SRCS = src/tuple.c src/canvas.c src/ppm.c \
+	src/projectile.c
 
 TEST_SRCS = tests/tuple_tests.c tests/canvas_tests.c tests/ppm_tests.c
 
