@@ -36,7 +36,7 @@ void ppm_write_pixel (FILE* file, color c) {
 	{
 		fprintf(file, "\n");
 		fprintf(file, "%d %d %d", ir, ig, ib);
-		pixels_on_line = 0;
+		pixels_on_line = 1;
 	}
 }
 
@@ -47,7 +47,7 @@ void ppm_write_footer(FILE* file) {
 void ppm_write_canvas(FILE* file, canvas *c) {
 	ppm_write_header(file, c->width, c->height);
 
-	for (int j = c->height - 1; j >= 0; j--) {
+	for (int j = 0; j < c->height; j++) {
 		for (int i = 0; i < c->width; i++) {
 			ppm_write_pixel(file, c->pixels[j * c->width + i]);
 		}

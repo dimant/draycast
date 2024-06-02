@@ -82,6 +82,42 @@ TEST(ppm_write_pixel_line_test)
 	ASSERT_EQ(0, strcmp(expected, buffer));
 }
 
+TEST(ppm_write_pixel_lines_test)
+{
+	size_t size = 1024;
+	char buffer[size];
+
+	memset(buffer, 0, size);
+
+	FILE* stream = fmemopen(buffer, size, "w");
+	if (stream == 0) 
+	{
+		ASSERT_FALSE(true);
+	}
+
+	color c = {0.1, 0.2, 0.3};
+
+	ppm_reset_line();
+
+	ppm_write_pixel(stream, c); // 1
+	ppm_write_pixel(stream, c); // 2
+	ppm_write_pixel(stream, c);	// 3
+	ppm_write_pixel(stream, c);	// 4
+	ppm_write_pixel(stream, c);	// 5
+	ppm_write_pixel(stream, c);	// 6
+	ppm_write_pixel(stream, c);	// 7
+	ppm_write_pixel(stream, c);	// 8
+	ppm_write_pixel(stream, c);	// 9
+	ppm_write_pixel(stream, c);	// 10
+
+	fflush(stream);
+
+	const char* expected = "25 51 76 25 51 76 25 51 76 25 51 76\n25 51 76 25 51 76 25 51 76 25 51 76\n25 51 76 25 51 76";
+
+	ASSERT_EQ(0, strcmp(expected, buffer));
+}
+
+
 TEST(ppm_write_footer_test)
 {
 	size_t size = 256;
