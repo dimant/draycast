@@ -12,7 +12,8 @@ TEST_TARGET = testme
 SRCS = src/tuple.c src/canvas.c src/ppm.c \
 	src/projectile.c src/matrix.c
 
-TEST_SRCS = tests/tuple_tests.c tests/canvas_tests.c tests/ppm_tests.c
+TEST_SRCS = tests/tuple_tests.c tests/canvas_tests.c tests/ppm_tests.c \
+	tests/matrix_tests.c
 
 # Define the object files
 OBJS = $(SRCS:.c=.o)
