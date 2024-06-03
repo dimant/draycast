@@ -7,6 +7,8 @@
 
 typedef float num;
 
+#define NABS(a) fabsf((a))
+
 typedef struct
 {
     num x;

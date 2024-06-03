@@ -25,6 +25,8 @@ TEST(ppm_write_header_test)
     fflush(stream);
 
     ASSERT_EQ(0, strcmp(expected, buffer));
+
+    return true;
 }
 
 TEST(ppm_write_pixel_test)
@@ -51,6 +53,8 @@ TEST(ppm_write_pixel_test)
     fflush(stream);
 
     ASSERT_EQ(0, strcmp(expected, buffer));
+
+    return true;
 }
 
 TEST(ppm_write_pixel_line_test)
@@ -80,6 +84,8 @@ TEST(ppm_write_pixel_line_test)
     const char *expected = "25 51 76 25 51 76 25 51 76 25 51 76\n25 51 76";
 
     ASSERT_EQ(0, strcmp(expected, buffer));
+
+    return true;
 }
 
 TEST(ppm_write_pixel_lines_test)
@@ -115,6 +121,8 @@ TEST(ppm_write_pixel_lines_test)
     const char *expected = "25 51 76 25 51 76 25 51 76 25 51 76\n25 51 76 25 51 76 25 51 76 25 51 76\n25 51 76 25 51 76";
 
     ASSERT_EQ(0, strcmp(expected, buffer));
+
+    return true;
 }
 
 TEST(ppm_write_footer_test)
@@ -137,6 +145,8 @@ TEST(ppm_write_footer_test)
     fflush(stream);
 
     ASSERT_EQ(0, strcmp(expected, buffer));
+
+    return true;
 }
 
 TEST(ppm_write_canvas_test)
@@ -170,4 +180,6 @@ TEST(ppm_write_canvas_test)
     const char *expected = "P3\n1 2\n255\n255 0 0 255 0 0\n";
 
     ASSERT_EQ(0, strcmp(expected, buffer));
+
+    return true;
 }

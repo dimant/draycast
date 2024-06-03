@@ -11,6 +11,8 @@ TEST(is_point_test)
     ASSERT_FLOAT_EQ(p.w, 1.0);
     ASSERT_TRUE(is_point(p));
     ASSERT_FALSE(is_vec(p));
+
+    return true;
 }
 
 TEST(is_vec_test)
@@ -22,12 +24,16 @@ TEST(is_vec_test)
     ASSERT_FLOAT_EQ(v.w, 0.0);
     ASSERT_FALSE(is_point(v));
     ASSERT_TRUE(is_vec(v));
+
+    return true;
 }
 
 TEST(num_eq_test)
 {
     ASSERT_TRUE(num_eq(1.0, 1.0));
     ASSERT_FALSE(num_eq(1.0, 1.1));
+
+    return true;
 }
 
 TEST(tuple_eq_test)
@@ -37,6 +43,8 @@ TEST(tuple_eq_test)
     ASSERT_TRUE(tuple_eq(a, b));
     b = new_point(1.0, 2.0, 3.1);
     ASSERT_FALSE(tuple_eq(a, b));
+
+    return true;
 }
 
 TEST(tuple_add_test)
@@ -47,6 +55,8 @@ TEST(tuple_add_test)
     tuple expected = new_point(1.0, 1.0, 6.0);
     ASSERT_TRUE(tuple_eq(c, expected));
     ASSERT_TRUE(is_point(c));
+
+    return true;
 }
 
 TEST(tuple_sub_test)
@@ -57,6 +67,8 @@ TEST(tuple_sub_test)
     tuple expected = new_vec(-2.0, -4.0, -6.0);
     ASSERT_TRUE(tuple_eq(c, expected));
     ASSERT_TRUE(is_vec(c));
+
+    return true;
 }
 
 TEST(tuple_neg_test)
@@ -66,6 +78,8 @@ TEST(tuple_neg_test)
     tuple expected = new_point(-1.0, 2.0, -3.0);
     expected.w = -expected.w;
     ASSERT_TRUE(tuple_eq(b, expected));
+
+    return true;
 }
 
 TEST(tuple_mul_scalar_test)
@@ -75,6 +89,8 @@ TEST(tuple_mul_scalar_test)
     tuple expected = new_point(3.5, -7.0, 10.5);
     expected.w = 3.5;
     ASSERT_TRUE(tuple_eq(b, expected));
+
+    return true;
 }
 
 TEST(tuple_div_scalar_test)
@@ -84,6 +100,8 @@ TEST(tuple_div_scalar_test)
     tuple expected = new_point(0.5, -1.0, 1.5);
     expected.w = 0.5;
     ASSERT_TRUE(tuple_eq(b, expected));
+
+    return true;
 }
 
 TEST(vec_mag_test)
@@ -94,6 +112,8 @@ TEST(vec_mag_test)
     ASSERT_FLOAT_EQ(1.0, vec_mag(a));
     ASSERT_FLOAT_EQ(1.0, vec_mag(b));
     ASSERT_FLOAT_EQ(1.0, vec_mag(c));
+
+    return true;
 }
 
 TEST(vec_norm_test)
@@ -103,6 +123,8 @@ TEST(vec_norm_test)
     tuple c = vec_norm(b);
     ASSERT_FLOAT_EQ(1.0, vec_mag(c));
     ASSERT_FLOAT_EQ(1.0, vec_mag(vec_norm(a)));
+
+    return true;
 }
 
 TEST(vec_dot_test)
@@ -110,6 +132,8 @@ TEST(vec_dot_test)
     tuple a = new_vec(1.0, 2.0, 3.0);
     tuple b = new_vec(2.0, 3.0, 4.0);
     ASSERT_FLOAT_EQ(20.0, vec_dot(a, b));
+
+    return true;
 }
 
 TEST(vec_cross_test)
@@ -123,6 +147,8 @@ TEST(vec_cross_test)
     tuple actual2 = vec_cross(b, a);
     tuple expected2 = new_vec(1.0, -2.0, 1.0);
     ASSERT_TRUE(tuple_eq(actual2, expected2));
+
+    return true;
 }
 
 TEST(color_mul_test)
@@ -132,4 +158,6 @@ TEST(color_mul_test)
     color c = color_mul(a, b);
     color expected = new_color(0.9, 0.2, 0.04);
     ASSERT_TRUE(tuple_eq(c, expected));
+
+    return true;
 }

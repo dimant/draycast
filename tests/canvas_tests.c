@@ -18,6 +18,8 @@ TEST(new_canvas_test)
     }
 
     free_canvas(&c);
+
+    return true;
 }
 
 TEST(write_pixel_test)
@@ -27,4 +29,6 @@ TEST(write_pixel_test)
     canvas_write_pixel(c, 2, 3, red);
     ASSERT_TRUE(tuple_eq(canvas_pixel_at(c, 2, 3), red));
     free_canvas(&c);
+
+    return true;
 }

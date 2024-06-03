@@ -32,28 +32,28 @@ extern int test_count;
     if ((expected) != (actual))                                                                                               \
     {                                                                                                                         \
         printf("\033[31mFAILED:\033[0m %s:%d %s: expected %d, got %d\n", __FILE__, __LINE__, __func__, (expected), (actual)); \
-        return true;                                                                                                          \
+        return false;                                                                                                         \
     }
 
 #define ASSERT_FLOAT_EQ(expected, actual)                                                                                     \
     if (fabs((expected) - (actual)) > 1e-6)                                                                                   \
     {                                                                                                                         \
         printf("\033[31mFAILED:\033[0m %s:%d %s: expected %f, got %f\n", __FILE__, __LINE__, __func__, (expected), (actual)); \
-        return true;                                                                                                          \
+        return false;                                                                                                         \
     }
 
 #define ASSERT_TRUE(expr)                                                                                    \
     if (!(expr))                                                                                             \
     {                                                                                                        \
         printf("\033[31mFAILED:\033[0m %s:%d %s: expected true, got false\n", __FILE__, __LINE__, __func__); \
-        return true;                                                                                         \
+        return false;                                                                                        \
     }
 
 #define ASSERT_FALSE(expr)                                                                                   \
     if (expr)                                                                                                \
     {                                                                                                        \
         printf("\033[31mFAILED:\033[0m %s:%d %s: expected false, got true\n", __FILE__, __LINE__, __func__); \
-        return true;                                                                                         \
+        return false;                                                                                        \
     }
 
 #endif
