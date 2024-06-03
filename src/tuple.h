@@ -7,13 +7,13 @@
 
 typedef float num;
 
-typedef struct {
+typedef struct
+{
     num x;
     num y;
     num z;
-	num w;
+    num w;
 } tuple;
-
 
 typedef tuple point;
 

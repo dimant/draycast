@@ -3,10 +3,11 @@
 
 #include "tuple.h"
 
-typedef struct {
+typedef struct
+{
     int width;
     int height;
-    color* pixels;
+    color *pixels;
 } canvas;
 
 canvas *new_canvas(int width, int height);
