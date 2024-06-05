@@ -20,9 +20,9 @@ void Canvas::clear()
     }
 }
 
-void Canvas::set_pixel(int x, int y, float r, float g, float b)
+void Canvas::set_pixel(int x, int y, const Tuple &c)
 {
-    pixels[y * width + x] = Tuple(r, g, b, 0);
+    pixels[y * width + x] = Tuple(c.x, c.y, c.z, c.w);
 }
 
 Tuple Canvas::get_pixel(int x, int y) const

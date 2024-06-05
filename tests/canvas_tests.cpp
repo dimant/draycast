@@ -26,7 +26,7 @@ TEST(canvas_set_pixel_test)
 {
     Canvas c(10, 20);
 
-    c.set_pixel(2, 3, 1.0, 0.0, 0.0);
+    c.set_pixel(2, 3, Tuple(1.0, 0.0, 0.0, 0.0));
 
     ASSERT_EQ(c.get_pixel(2, 3), Tuple(1.0, 0.0, 0.0, 0.0));
 
