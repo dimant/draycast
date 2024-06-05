@@ -9,9 +9,9 @@ TARGET = draycast
 TEST_TARGET = testme
 
 # Define the source files
-SRCS = 
+SRCS = src/canvas.cpp
 
-TEST_SRCS = tests/dummy_tests.cpp tests/tuple_tests.cpp
+TEST_SRCS = tests/dummy_tests.cpp tests/tuple_tests.cpp tests/canvas_tests.cpp
 
 # Define the object files
 OBJS = $(SRCS:.cpp=.o)
