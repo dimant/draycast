@@ -11,7 +11,7 @@ TEST_TARGET = testme
 # Define the source files
 SRCS = 
 
-TEST_SRCS = tests/dummy_tests.cpp
+TEST_SRCS = tests/dummy_tests.cpp tests/tuple_tests.cpp
 
 # Define the object files
 OBJS = $(SRCS:.cpp=.o)
