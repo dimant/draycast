@@ -1,5 +1,5 @@
 # Define the compiler to use
-CC = g++
+CC = gcc
 
 # Define the compiler flags
 CFLAGS = -g -lm
@@ -9,12 +9,14 @@ TARGET = draycast
 TEST_TARGET = testme
 
 # Define the source files
-SRCS = 
+SRCS = src/tuple.c src/canvas.c src/ppm.c \
+	src/projectile.c src/matrix.c
 
-TEST_SRCS = tests/dummy_tests.cpp
+TEST_SRCS = tests/tuple_tests.c tests/canvas_tests.c tests/ppm_tests.c \
+	tests/matrix_tests.c
 
 # Define the object files
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRCS:.c=.o)
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 
 # Default target to build the program

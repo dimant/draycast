@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
     point position = new_point(0, 1, 0);
     vec velocity = tuple_mul_scalar(vec_norm(new_vec(1, 1.8, 0)), 11.25);
-
+	
     vec gravity = new_vec(0, -0.1, 0);
     vec wind = new_vec(-0.01, 0, 0);
 
