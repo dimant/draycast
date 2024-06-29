@@ -15,7 +15,10 @@ TEST(canvas_test)
     {
         for (int x = 0; x < c.get_width(); x++)
         {
-            ASSERT_EQ(c.get_pixel(x, y), Tuple(0, 0, 0, 0));
+            ASSERT_FLOAT_EQ(c.get_pixel(x, y).x, Tuple(0, 0, 0, 0).x);
+            ASSERT_FLOAT_EQ(c.get_pixel(x, y).y, Tuple(0, 0, 0, 0).y);
+            ASSERT_FLOAT_EQ(c.get_pixel(x, y).z, Tuple(0, 0, 0, 0).z);
+            ASSERT_FLOAT_EQ(c.get_pixel(x, y).w, Tuple(0, 0, 0, 0).w);
         }
     }
 
@@ -28,7 +31,10 @@ TEST(canvas_set_pixel_test)
 
     c.set_pixel(2, 3, Tuple(1.0, 0.0, 0.0, 0.0));
 
-    ASSERT_EQ(c.get_pixel(2, 3), Tuple(1.0, 0.0, 0.0, 0.0));
+    ASSERT_FLOAT_EQ(c.get_pixel(2, 3).x, Tuple(1.0, 0.0, 0.0, 0.0).x);
+    ASSERT_FLOAT_EQ(c.get_pixel(2, 3).y, Tuple(1.0, 0.0, 0.0, 0.0).y);
+    ASSERT_FLOAT_EQ(c.get_pixel(2, 3).z, Tuple(1.0, 0.0, 0.0, 0.0).z);
+    ASSERT_FLOAT_EQ(c.get_pixel(2, 3).w, Tuple(1.0, 0.0, 0.0, 0.0).w);
 
     return true;
 }

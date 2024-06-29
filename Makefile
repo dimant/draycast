@@ -16,7 +16,7 @@ TEST_SRCS = tests/dummy_tests.cpp tests/tuple_tests.cpp tests/canvas_tests.cpp t
 
 # Define the object files
 OBJS = $(SRCS:.cpp=.o)
-TEST_OBJS = $(TEST_SRCS:.c=.o)
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
 # Default target to build the program
 all: $(TARGET)

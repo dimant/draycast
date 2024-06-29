@@ -2,6 +2,7 @@
 #define TESTFRAMEWORK_H
 
 #include <stdio.h>
+#include <iostream>
 #include <stdbool.h>
 #include <math.h>
 
@@ -31,7 +32,8 @@ extern int test_count;
 #define ASSERT_EQ(expected, actual)                                                                                           \
     if ((expected) != (actual))                                                                                               \
     {                                                                                                                         \
-        printf("\033[31mFAILED:\033[0m %s:%d %s: expected %d, got %d\n", __FILE__, __LINE__, __func__, (expected), (actual)); \
+        std::cout << "\033[31mFAILED:\033[0m " << __FILE__ << ":" << __LINE__ << " " << __func__ << ":                        \
+        expected " << (expected) << ", got " << (actual) << std::endl;                                                        \
         return false;                                                                                                         \
     }
 
