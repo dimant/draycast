@@ -19,7 +19,7 @@ int main()
         if (position.x >= 0 && position.x < c.get_width() && (int)position.y >= 0 && c.get_height() - (int)position.y < c.get_height())
         {
             c.set_pixel((int)position.x, c.get_height() - (int)position.y, Tuple(1, 0, 0, 1));
-            std::cout << "Position: (" << position.x << ", " << position.y << ", " << position.z << ")\n";
+            // std::cout << "Position: (" << position.x << ", " << position.y << ", " << position.z << ")\n";
         }
     }
 
