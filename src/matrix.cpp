@@ -1,4 +1,5 @@
 #include "math.h"
+#include <algorithm>
 
 #include "matrix.h"
 #include "tuple.h"
@@ -65,4 +66,23 @@ Matrix<N> Matrix<N>::operator*(const Matrix<N> &m) const
     }
 
     return result;
+}
+
+#include <stdio.h>
+
+template void Matrix<4>::transpose();
+template void Matrix<3>::transpose();
+template void Matrix<2>::transpose();
+
+template <size_t N>
+void Matrix<N>::transpose()
+{
+    for (size_t row = 0; row < N; row++)
+    {
+        for (size_t col = row; col < N; col++)
+        {
+            std::swap(data[row][col], data[col][row]);
+        }
+    }
+
 }

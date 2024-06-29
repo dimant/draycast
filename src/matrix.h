@@ -30,6 +30,8 @@ public:
     }
 
     Matrix<N> operator*(const Matrix<N> &m) const;
+
+    void transpose();
 };
 
 #endif

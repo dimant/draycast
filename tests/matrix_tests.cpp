@@ -158,3 +158,40 @@ TEST(matrix4_identity_test)
 
     return true;
 }
+
+TEST(matrix4_transpose_test)
+{
+    Matrix<4> m;
+
+    for (size_t row = 0; row < 4; row++)
+    {
+        for (size_t col = 0; col < 4; col++)
+        {
+            m.set(row, col, (float) row * 4 + col);
+        }
+    }
+
+    m.transpose();
+
+    ASSERT_FLOAT_EQ(0.0,   m.get(0,0));
+    ASSERT_FLOAT_EQ(4.0,   m.get(0,1));
+    ASSERT_FLOAT_EQ(8.0,   m.get(0,2));
+    ASSERT_FLOAT_EQ(12.0,  m.get(0,3));
+
+    ASSERT_FLOAT_EQ(1.0,   m.get(1,0));
+    ASSERT_FLOAT_EQ(5.0,   m.get(1,1));
+    ASSERT_FLOAT_EQ(9.0,   m.get(1,2));
+    ASSERT_FLOAT_EQ(13.0,  m.get(1,3));
+
+    ASSERT_FLOAT_EQ(2.0,   m.get(2,0));
+    ASSERT_FLOAT_EQ(6.0,   m.get(2,1));
+    ASSERT_FLOAT_EQ(10.0,  m.get(2,2));
+    ASSERT_FLOAT_EQ(14.0,  m.get(2,3));
+
+    ASSERT_FLOAT_EQ(3.0,   m.get(3,0));
+    ASSERT_FLOAT_EQ(7.0,   m.get(3,1));
+    ASSERT_FLOAT_EQ(11.0,  m.get(3,2));
+    ASSERT_FLOAT_EQ(15.0,  m.get(3,3));
+
+    return true;
+}
