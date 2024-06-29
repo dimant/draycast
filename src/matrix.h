@@ -21,6 +21,13 @@ public:
     {
         data[row][col] = value;
     }
+
+    bool operator==(const Matrix<N> &m) const;
+
+    bool operator!=(const Matrix<N> &m) const
+    {
+        return !(*this == m);
+    }
 };
 
 #endif

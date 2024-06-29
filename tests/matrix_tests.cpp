@@ -49,3 +49,51 @@ TEST(matrix2_access_test)
 
     return true;
 }
+
+TEST(matrix4_eq_test)
+{
+    Matrix<4> m1;
+    Matrix<4> m2;
+
+
+    for (size_t row = 0; row < 2; row++)
+    {
+        for (size_t col = 0; col < 2; col++)
+        {
+            m1.set(row, col, (float) row * 4 + col);
+            m2.set(row, col, (float) row * 4 + col);
+        }
+    }
+
+    ASSERT_TRUE(m1 == m2);
+
+    m2.set(0, 0, -3.0f);
+
+    ASSERT_FALSE(m1 == m2);
+
+    return true;
+}
+
+TEST(matrix4_neq_test)
+{
+    Matrix<4> m1;
+    Matrix<4> m2;
+
+
+    for (size_t row = 0; row < 2; row++)
+    {
+        for (size_t col = 0; col < 2; col++)
+        {
+            m1.set(row, col, (float) row * 4 + col);
+            m2.set(row, col, (float) row * 4 + col);
+        }
+    }
+
+    ASSERT_FALSE(m1 != m2);
+
+    m2.set(0, 0, -3.0f);
+
+    ASSERT_TRUE(m1 != m2);
+
+    return true;
+}
