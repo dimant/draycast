@@ -24,10 +24,12 @@ public:
 
     bool operator==(const Matrix<N> &m) const;
 
-    bool operator!=(const Matrix<N> &m) const
+    bool operator!=(const Matrix<N> &m)
     {
         return !(*this == m);
     }
+
+    Matrix<N> operator*(const Matrix<N> &m) const;
 };
 
 #endif

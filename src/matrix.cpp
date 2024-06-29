@@ -19,18 +19,18 @@ Matrix<N>::Matrix()
     }
 }
 
-template bool Matrix<4>::operator==(const Matrix &m) const;
-template bool Matrix<3>::operator==(const Matrix &m) const;
-template bool Matrix<2>::operator==(const Matrix &m) const;
+template bool Matrix<4>::operator==(const Matrix<4> &m) const;
+template bool Matrix<3>::operator==(const Matrix<3> &m) const;
+template bool Matrix<2>::operator==(const Matrix<2> &m) const;
 
 template <size_t N>
-bool Matrix<N>::operator==(const Matrix &m) const
+bool Matrix<N>::operator==(const Matrix<N> &m) const
 {
     for (size_t row = 0; row < N; row++)
     {
         for (size_t col = 0; col < N; col++)
         {
-            if (fabs(this->get(row, col) - m.get(row, col)) > EPSILON)
+            if (fabs(this->data[row][col] - m.data[row][col]) > EPSILON)
             {
                 return false;
             }
@@ -38,4 +38,31 @@ bool Matrix<N>::operator==(const Matrix &m) const
     }
 
     return true;
+}
+
+template Matrix<4> Matrix<4>::operator*(const Matrix<4> &m) const;
+template Matrix<3> Matrix<3>::operator*(const Matrix<3> &m) const;
+template Matrix<2> Matrix<2>::operator*(const Matrix<2> &m) const;
+
+template <size_t N>
+Matrix<N> Matrix<N>::operator*(const Matrix<N> &m) const
+{
+    Matrix<N> result;
+
+    for (size_t row = 0; row < N; row++)
+    {
+        for (size_t col = 0; col < N; col++)
+        {
+            float c = 0.0f;
+
+            for (size_t i = 0; i < N; i++)
+            {
+                c += this->data[row][i] * m.data[i][col];
+            }
+
+            result.data[row][col] = c;
+        }
+    }
+
+    return result;
 }

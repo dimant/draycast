@@ -79,7 +79,6 @@ TEST(matrix4_neq_test)
     Matrix<4> m1;
     Matrix<4> m2;
 
-
     for (size_t row = 0; row < 2; row++)
     {
         for (size_t col = 0; col < 2; col++)
@@ -94,6 +93,45 @@ TEST(matrix4_neq_test)
     m2.set(0, 0, -3.0f);
 
     ASSERT_TRUE(m1 != m2);
+
+    return true;
+}
+
+TEST(matrix4_mul_test)
+{
+    Matrix<4> m1;
+    Matrix<4> m2;
+
+    for (size_t row = 0; row < 4; row++)
+    {
+        for (size_t col = 0; col < 4; col++)
+        {
+            m1.set(row, col, (float) row * 4 + col);
+            m2.set(row, col, (float) row * 4 + col);
+        }
+    }
+
+    Matrix<4> result = m1 * m2;
+
+    ASSERT_FLOAT_EQ(56.0f, result.get(0, 0));
+    ASSERT_FLOAT_EQ(62.0f, result.get(0, 1));
+    ASSERT_FLOAT_EQ(68.0f, result.get(0, 2));
+    ASSERT_FLOAT_EQ(74.0f, result.get(0, 3));
+
+    ASSERT_FLOAT_EQ(152.0f, result.get(1, 0));
+    ASSERT_FLOAT_EQ(174.0f, result.get(1, 1));
+    ASSERT_FLOAT_EQ(196.0f, result.get(1, 2));
+    ASSERT_FLOAT_EQ(218.0f, result.get(1, 3));
+
+    ASSERT_FLOAT_EQ(248.0f, result.get(2, 0));
+    ASSERT_FLOAT_EQ(286.0f, result.get(2, 1));
+    ASSERT_FLOAT_EQ(324.0f, result.get(2, 2));
+    ASSERT_FLOAT_EQ(362.0f, result.get(2, 3));
+
+    ASSERT_FLOAT_EQ(344.0f, result.get(3, 0));
+    ASSERT_FLOAT_EQ(398.0f, result.get(3, 1));
+    ASSERT_FLOAT_EQ(452.0f, result.get(3, 2));
+    ASSERT_FLOAT_EQ(506.0f, result.get(3, 3));
 
     return true;
 }
