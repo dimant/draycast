@@ -135,3 +135,26 @@ TEST(matrix4_mul_test)
 
     return true;
 }
+
+TEST(matrix4_identity_test)
+{
+    Matrix<4> m;
+    Matrix<4> identity;
+
+    for (size_t row = 0; row < 4; row++)
+    {
+        for (size_t col = 0; col < 4; col++)
+        {
+            m.set(row, col, (float) row * 4 + col);
+
+        }
+
+        identity.set(row, row, 1.0f);
+    }
+
+    Matrix<4> result = m * identity;
+
+    ASSERT_TRUE(result == m);
+
+    return true;
+}
