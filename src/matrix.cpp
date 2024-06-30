@@ -158,3 +158,13 @@ float Matrix<N>::cofactor(size_t row, size_t col) const
 {
     return (row + col) % 2 == 0 ? minor(row, col) : -minor(row, col);
 }
+
+template bool Matrix<2>::invertible() const;
+template bool Matrix<3>::invertible() const;
+template bool Matrix<4>::invertible() const;
+
+template <size_t N>
+bool Matrix<N>::invertible() const
+{
+    return fabs(determinant()) < EPSILON ? false : true;
+}

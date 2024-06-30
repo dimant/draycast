@@ -368,3 +368,61 @@ TEST(matrix4_determinant_test)
 
     return true;
 }
+
+TEST(matrix4_invertible_test)
+{
+    Matrix<4> m;
+
+    m.set(0, 0, 6.0f);
+    m.set(0, 1, 4.0f);
+    m.set(0, 2, 4.0f);
+    m.set(0, 3, 4.0f);
+
+    m.set(1, 0, 5.0f);
+    m.set(1, 1, 5.0f);
+    m.set(1, 2, 7.0f);
+    m.set(1, 3, 6.0f);
+
+    m.set(2, 0, 4.0f);
+    m.set(2, 1, -9.0f);
+    m.set(2, 2, 3.0f);
+    m.set(2, 3, -7.0f);
+
+    m.set(3, 0, 9.0f);
+    m.set(3, 1, 1.0f);
+    m.set(3, 2, 7.0f);
+    m.set(3, 3, -6.0f);
+
+    ASSERT_TRUE(m.invertible());
+
+    return true;
+}
+
+TEST(matrix4_not_invertible_test)
+{
+    Matrix<4> m;
+
+    m.set(0, 0, -4.0f);
+    m.set(0, 1, 2.0f);
+    m.set(0, 2, -2.0f);
+    m.set(0, 3, 3.0f);
+
+    m.set(1, 0, 9.0f);
+    m.set(1, 1, 6.0f);
+    m.set(1, 2, 2.0f);
+    m.set(1, 3, 6.0f);
+
+    m.set(2, 0, 0.0f);
+    m.set(2, 1, -5.0f);
+    m.set(2, 2, 1.0f);
+    m.set(2, 3, -5.0f);
+
+    m.set(3, 0, 0.0f);
+    m.set(3, 1, 0.0f);
+    m.set(3, 2, 0.0f);
+    m.set(3, 3, 0.0f);
+
+    ASSERT_FALSE(m.invertible());
+
+    return true;
+}

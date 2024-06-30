@@ -40,6 +40,8 @@ public:
     float minor(size_t row, size_t col) const;
 
     float cofactor(size_t row, size_t col) const;
+
+    bool invertible() const;
 };
 
 #endif
