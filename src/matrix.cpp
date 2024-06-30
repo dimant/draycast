@@ -93,6 +93,23 @@ float Matrix<2>::determinant() const
     return data[0][0] * data[1][1] - data[0][1] * data[1][0];
 }
 
+template <>
+float Matrix<3>::determinant() const
+{
+    return data[0][0] * cofactor(0, 0) +
+           data[0][1] * cofactor(0, 1) +
+           data[0][2] * cofactor(0, 2);
+}
+
+template <>
+float Matrix<4>::determinant() const
+{
+    return data[0][0] * cofactor(0, 0) +
+           data[0][1] * cofactor(0, 1) +
+           data[0][2] * cofactor(0, 2) +
+           data[0][3] * cofactor(0, 3);
+}
+
 template Matrix<3> Matrix<4>::submatrix(size_t row, size_t col) const;
 template Matrix<2> Matrix<3>::submatrix(size_t row, size_t col) const;
 
@@ -124,14 +141,20 @@ Matrix<N - 1> Matrix<N>::submatrix(size_t row, size_t col) const
     return result;
 }
 
-template <>
-float Matrix<3>::minor(size_t row, size_t col) const
+template float Matrix<3>::minor(size_t, size_t) const;
+template float Matrix<4>::minor(size_t, size_t) const;
+
+template <size_t N>
+float Matrix<N>::minor(size_t row, size_t col) const
 {
     return submatrix(row, col).determinant();
 }
 
-template <>
-float Matrix<3>::cofactor(size_t row, size_t col) const
+template float Matrix<3>::cofactor(size_t, size_t) const;
+template float Matrix<4>::cofactor(size_t, size_t) const;
+
+template <size_t N>
+float Matrix<N>::cofactor(size_t row, size_t col) const
 {
     return (row + col) % 2 == 0 ? minor(row, col) : -minor(row, col);
 }

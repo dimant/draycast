@@ -309,3 +309,62 @@ TEST(matrix3_cofactor)
 
     return true;
 }
+
+TEST(matrix3_determinant_test)
+{
+    Matrix<3> m;
+
+    m.set(0, 0, 1.0f);
+    m.set(0, 1, 2.0f);
+    m.set(0, 2, 6.0f);
+
+    m.set(1, 0, -5.0f);
+    m.set(1, 1, 8.0f);
+    m.set(1, 2, -4.0f);
+
+    m.set(2, 0, 2.0f);
+    m.set(2, 1, 6.0f);
+    m.set(2, 2, 4.0f);
+
+    ASSERT_FLOAT_EQ(56.0f, m.cofactor(0, 0));
+    ASSERT_FLOAT_EQ(12.0f, m.cofactor(0, 1));
+    ASSERT_FLOAT_EQ(-46.0f, m.cofactor(0, 2));
+
+    ASSERT_FLOAT_EQ(-196.0f, m.determinant());
+
+    return true;
+}
+
+TEST(matrix4_determinant_test)
+{
+    Matrix<4> m;
+
+    m.set(0, 0, -2.0f);
+    m.set(0, 1, -8.0f);
+    m.set(0, 2, 3.0f);
+    m.set(0, 3, 5.0f);
+
+    m.set(1, 0, -3.0f);
+    m.set(1, 1, 1.0f);
+    m.set(1, 2, 7.0f);
+    m.set(1, 3, 3.0f);
+
+    m.set(2, 0, 1.0f);
+    m.set(2, 1, 2.0f);
+    m.set(2, 2, -9.0f);
+    m.set(2, 3, 6.0f);
+
+    m.set(3, 0, -6.0f);
+    m.set(3, 1, 7.0f);
+    m.set(3, 2, 7.0f);
+    m.set(3, 3, -9.0f);
+
+    ASSERT_FLOAT_EQ(690.0f, m.cofactor(0, 0));
+    ASSERT_FLOAT_EQ(447.0f, m.cofactor(0, 1));
+    ASSERT_FLOAT_EQ(210.0f, m.cofactor(0, 2));
+    ASSERT_FLOAT_EQ(51.0f, m.cofactor(0, 3));
+
+    ASSERT_FLOAT_EQ(-4071.0f, m.determinant());
+
+    return true;
+}
