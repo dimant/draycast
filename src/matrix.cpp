@@ -129,3 +129,9 @@ float Matrix<3>::minor(size_t row, size_t col) const
 {
     return submatrix(row, col).determinant();
 }
+
+template <>
+float Matrix<3>::cofactor(size_t row, size_t col) const
+{
+    return (row + col) % 2 == 0 ? minor(row, col) : -minor(row, col);
+}

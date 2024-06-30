@@ -284,3 +284,28 @@ TEST(matrix3_minor)
 
     return true;
 }
+
+TEST(matrix3_cofactor)
+{
+    Matrix<3> m;
+
+    m.set(0, 0, 3.0f);
+    m.set(0, 1, 5.0f);
+    m.set(0, 2, 0.0f);
+
+    m.set(1, 0, 2.0f);
+    m.set(1, 1, -1.0f);
+    m.set(1, 2, -7.0f);
+
+    m.set(2, 0, 6.0f);
+    m.set(2, 1, -1.0f);
+    m.set(2, 2, 5.0f);
+
+    ASSERT_FLOAT_EQ(-12.0f, m.minor(0, 0));
+    ASSERT_FLOAT_EQ(-12.0f, m.cofactor(0, 0));
+
+    ASSERT_FLOAT_EQ(25.0f, m.minor(1, 0));
+    ASSERT_FLOAT_EQ(-25.0f, m.cofactor(1, 0));
+
+    return true;
+}
