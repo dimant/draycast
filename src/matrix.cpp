@@ -106,22 +106,15 @@ Matrix<N - 1> Matrix<N>::submatrix(size_t row, size_t col) const
 
     for (size_t i = 0; i < N; i++)
     {
-        if (i == row)
-        {
-            continue;
-        }
+        if (i == row) continue;
 
         c = 0;
 
         for (size_t j = 0; j < N; j++)
         {
-            if (j == col)
-            {
-                continue;
-            }
+            if (j == col) continue;
 
             result.set(r, c, data[i][j]);
-
             c++;
         }
 
@@ -129,4 +122,10 @@ Matrix<N - 1> Matrix<N>::submatrix(size_t row, size_t col) const
     }
 
     return result;
+}
+
+template <>
+float Matrix<3>::minor(size_t row, size_t col) const
+{
+    return submatrix(row, col).determinant();
 }

@@ -36,6 +36,8 @@ public:
     float determinant() const;
 
     Matrix<N - 1> submatrix(size_t row, size_t col) const;
+
+    float minor(size_t row, size_t col) const;
 };
 
 #endif

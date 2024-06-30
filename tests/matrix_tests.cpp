@@ -210,13 +210,6 @@ TEST(matrix2_determinant)
     return true;
 }
 
-// 0 1 2
-// 3 4 5
-// 6 7 8 
-
-// 0 1
-// 6 7
-
 TEST(matrix3_submatrix)
 {
     Matrix<3> m;
@@ -265,6 +258,36 @@ TEST(matrix4_submatrix)
     ASSERT_FLOAT_EQ(12.0f, sub.get(2, 0));
     ASSERT_FLOAT_EQ(13.0f, sub.get(2, 1));
     ASSERT_FLOAT_EQ(15.0f, sub.get(2, 2));
+
+    return true;
+}
+
+TEST(matrix3_minor)
+{
+    Matrix<3> m;
+
+    // 3 5 0
+    // 2 -1 -7
+    // 6 -1 5
+
+    // 3 5
+    // 6 -1
+
+    m.set(0, 0, 3.0f);
+    m.set(0, 1, 5.0f);
+    m.set(0, 2, 0.0f);
+
+    m.set(1, 0, 2.0f);
+    m.set(1, 1, -1.0f);
+    m.set(1, 2, -7.0f);
+
+    m.set(2, 0, 6.0f);
+    m.set(2, 1, -1.0f);
+    m.set(2, 2, 5.0f);
+
+    Matrix<2> sub = m.submatrix(0, 0);
+
+    ASSERT_FLOAT_EQ(25.0f, m.minor(1, 0));
 
     return true;
 }
