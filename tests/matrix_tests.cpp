@@ -427,7 +427,7 @@ TEST(matrix4_not_invertible_test)
     return true;
 }
 
-TEST(matrix4_inverse_test)
+TEST(matrix4_inverse_test1)
 {
     Matrix<4> m;
 
@@ -472,6 +472,159 @@ TEST(matrix4_inverse_test)
     ASSERT_FLOAT_EQ(-0.81391f, inverse.get(3, 1));
     ASSERT_FLOAT_EQ(-0.30075f, inverse.get(3, 2));
     ASSERT_FLOAT_EQ(0.30639f, inverse.get(3, 3));
+
+    return true;
+}
+
+TEST(matrix4_inverse_test2)
+{
+    Matrix<4> m;
+
+    m.set(0, 0, 8.0f);
+    m.set(0, 1, -5.0f);
+    m.set(0, 2, 9.0f);
+    m.set(0, 3, 2.0f);
+
+    m.set(1, 0, 7.0f);
+    m.set(1, 1, 5.0f);
+    m.set(1, 2, 6.0f);
+    m.set(1, 3, 1.0f);
+
+    m.set(2, 0, -6.0f);
+    m.set(2, 1, 0.0f);
+    m.set(2, 2, 9.0f);
+    m.set(2, 3, 6.0f);
+
+    m.set(3, 0, -3.0f);
+    m.set(3, 1, 0.0f);
+    m.set(3, 2, -9.0f);
+    m.set(3, 3, -4.0f);
+
+    Matrix<4> inverse = m.inverse();
+
+    ASSERT_FLOAT_EQ(-0.15385f, inverse.get(0, 0));
+    ASSERT_FLOAT_EQ(-0.15385f, inverse.get(0, 1));
+    ASSERT_FLOAT_EQ(-0.28205f, inverse.get(0, 2));
+    ASSERT_FLOAT_EQ(-0.53846f, inverse.get(0, 3));
+
+    ASSERT_FLOAT_EQ(-0.07692f, inverse.get(1, 0));
+    ASSERT_FLOAT_EQ(0.12308f, inverse.get(1, 1));
+    ASSERT_FLOAT_EQ(0.02564f, inverse.get(1, 2));
+    ASSERT_FLOAT_EQ(0.03077f, inverse.get(1, 3));
+
+    ASSERT_FLOAT_EQ(0.35897f, inverse.get(2, 0));
+    ASSERT_FLOAT_EQ(0.35897f, inverse.get(2, 1));
+    ASSERT_FLOAT_EQ(0.43590f, inverse.get(2, 2));
+    ASSERT_FLOAT_EQ(0.92308f, inverse.get(2, 3));
+
+    ASSERT_FLOAT_EQ(-0.69231f, inverse.get(3, 0));
+    ASSERT_FLOAT_EQ(-0.69231f, inverse.get(3, 1));
+    ASSERT_FLOAT_EQ(-0.76923f, inverse.get(3, 2));
+    ASSERT_FLOAT_EQ(-1.92308f, inverse.get(3, 3));
+
+    return true;
+}
+
+TEST(matrix4_inverse_test3)
+{
+    Matrix<4> m;
+
+    m.set(0, 0, 9.0f);
+    m.set(0, 1, 3.0f);
+    m.set(0, 2, 0.0f);
+    m.set(0, 3, 9.0f);
+
+    m.set(1, 0, -5.0f);
+    m.set(1, 1, -2.0f);
+    m.set(1, 2, -6.0f);
+    m.set(1, 3, -3.0f);
+
+    m.set(2, 0, -4.0f);
+    m.set(2, 1, 9.0f);
+    m.set(2, 2, 6.0f);
+    m.set(2, 3, 4.0f);
+
+    m.set(3, 0, -7.0f);
+    m.set(3, 1, 6.0f);
+    m.set(3, 2, 6.0f);
+    m.set(3, 3, 2.0f);
+
+    Matrix<4> inverse = m.inverse();
+
+    ASSERT_FLOAT_EQ(-0.04074f, inverse.get(0, 0));
+    ASSERT_FLOAT_EQ(-0.07778f, inverse.get(0, 1));
+    ASSERT_FLOAT_EQ(0.14444f, inverse.get(0, 2));
+    ASSERT_FLOAT_EQ(-0.22222f, inverse.get(0, 3));
+
+    ASSERT_FLOAT_EQ(-0.07778f, inverse.get(1, 0));
+    ASSERT_FLOAT_EQ(0.03333f, inverse.get(1, 1));
+    ASSERT_FLOAT_EQ(0.36667f, inverse.get(1, 2));
+    ASSERT_FLOAT_EQ(-0.33333f, inverse.get(1, 3));
+
+    ASSERT_FLOAT_EQ(-0.02901f, inverse.get(2, 0));
+    ASSERT_FLOAT_EQ(-0.14630f, inverse.get(2, 1));
+    ASSERT_FLOAT_EQ(-0.10926f, inverse.get(2, 2));
+    ASSERT_FLOAT_EQ(0.12963f, inverse.get(2, 3));
+
+    ASSERT_FLOAT_EQ(0.17778f, inverse.get(3, 0));
+    ASSERT_FLOAT_EQ(0.06667f, inverse.get(3, 1));
+    ASSERT_FLOAT_EQ(-0.26667f, inverse.get(3, 2));
+    ASSERT_FLOAT_EQ(0.33333f, inverse.get(3, 3));
+
+    return true;
+}
+
+TEST(matrix4_inverse_mul_test)
+{
+    Matrix<4> a;
+
+    a.set(0, 0, 3.0f);
+    a.set(0, 1, -9.0f);
+    a.set(0, 2, 7.0f);
+    a.set(0, 3, 3.0f);
+
+    a.set(1, 0, 3.0f);
+    a.set(1, 1, -8.0f);
+    a.set(1, 2, 2.0f);
+    a.set(1, 3, -9.0f);
+
+    a.set(2, 0, -4.0f);
+    a.set(2, 1, 4.0f);
+    a.set(2, 2, 4.0f);
+    a.set(2, 3, 1.0f);
+
+    a.set(3, 0, -6.0f);
+    a.set(3, 1, 5.0f);
+    a.set(3, 2, 1.0f);
+    a.set(3, 3, 1.0f);
+
+    Matrix<4> b;
+
+    b.set(0, 0, 8.0f);
+    b.set(0, 1, 2.0f);
+    b.set(0, 2, 2.0f);
+    b.set(0, 3, 2.0f);
+
+    b.set(1, 0, 3.0f);
+    b.set(1, 1, -1.0f);
+    b.set(1, 2, 7.0f);
+    b.set(1, 3, 0.0f);
+
+    b.set(2, 0, 7.0f);
+    b.set(2, 1, 0.0f);
+    b.set(2, 2, 5.0f);
+    b.set(2, 3, 4.0f);
+
+    b.set(3, 0, 6.0f);
+    b.set(3, 1, -2.0f);
+    b.set(3, 2, 0.0f);
+    b.set(3, 3, 5.0f);
+
+    Matrix<4> c = a * b;
+
+    Matrix<4> d = c * b.inverse();
+
+    ASSERT_TRUE(a == d);
 
     return true;
 }
