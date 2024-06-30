@@ -92,3 +92,41 @@ float Matrix<2>::determinant() const
 {
     return data[0][0] * data[1][1] - data[0][1] * data[1][0];
 }
+
+template Matrix<3> Matrix<4>::submatrix(size_t row, size_t col) const;
+template Matrix<2> Matrix<3>::submatrix(size_t row, size_t col) const;
+
+template <size_t N>
+Matrix<N - 1> Matrix<N>::submatrix(size_t row, size_t col) const
+{
+    Matrix<N - 1> result;
+
+    size_t r = 0;
+    size_t c = 0;
+
+    for (size_t i = 0; i < N; i++)
+    {
+        if (i == row)
+        {
+            continue;
+        }
+
+        c = 0;
+
+        for (size_t j = 0; j < N; j++)
+        {
+            if (j == col)
+            {
+                continue;
+            }
+
+            result.set(r, c, data[i][j]);
+
+            c++;
+        }
+
+        r++;
+    }
+
+    return result;
+}

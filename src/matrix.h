@@ -34,6 +34,8 @@ public:
     void transpose();
 
     float determinant() const;
+
+    Matrix<N - 1> submatrix(size_t row, size_t col) const;
 };
 
 #endif

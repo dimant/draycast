@@ -209,3 +209,62 @@ TEST(matrix2_determinant)
 
     return true;
 }
+
+// 0 1 2
+// 3 4 5
+// 6 7 8 
+
+// 0 1
+// 6 7
+
+TEST(matrix3_submatrix)
+{
+    Matrix<3> m;
+
+    for (size_t row = 0; row < 3; row++)
+    {
+        for (size_t col = 0; col < 3; col++)
+        {
+            m.set(row, col, (float) row * 3 + col);
+        }
+    }
+
+    Matrix<2> sub = m.submatrix(1, 2);
+
+    ASSERT_FLOAT_EQ(0.0f, sub.get(0, 0));
+    ASSERT_FLOAT_EQ(1.0f, sub.get(0, 1));
+
+    ASSERT_FLOAT_EQ(6.0f, sub.get(1, 0));
+    ASSERT_FLOAT_EQ(7.0f, sub.get(1, 1));
+
+    return true;
+}
+
+TEST(matrix4_submatrix)
+{
+    Matrix<4> m;
+
+    for (size_t row = 0; row < 4; row++)
+    {
+        for (size_t col = 0; col < 4; col++)
+        {
+            m.set(row, col, (float) row * 4 + col);
+        }
+    }
+
+    Matrix<3> sub = m.submatrix(1, 2);
+
+    ASSERT_FLOAT_EQ(0.0f, sub.get(0, 0));
+    ASSERT_FLOAT_EQ(1.0f, sub.get(0, 1));
+    ASSERT_FLOAT_EQ(3.0f, sub.get(0, 2));
+
+    ASSERT_FLOAT_EQ(8.0f, sub.get(1, 0));
+    ASSERT_FLOAT_EQ(9.0f, sub.get(1, 1));
+    ASSERT_FLOAT_EQ(11.0f, sub.get(1, 2));
+
+    ASSERT_FLOAT_EQ(12.0f, sub.get(2, 0));
+    ASSERT_FLOAT_EQ(13.0f, sub.get(2, 1));
+    ASSERT_FLOAT_EQ(15.0f, sub.get(2, 2));
+
+    return true;
+}
