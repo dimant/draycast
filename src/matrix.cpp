@@ -86,3 +86,9 @@ void Matrix<N>::transpose()
     }
 
 }
+
+template <>
+float Matrix<2>::determinant() const
+{
+    return data[0][0] * data[1][1] - data[0][1] * data[1][0];
+}

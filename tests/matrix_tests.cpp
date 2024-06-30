@@ -195,3 +195,17 @@ TEST(matrix4_transpose_test)
 
     return true;
 }
+
+TEST(matrix2_determinant)
+{
+    Matrix<2> m;
+
+    m.set(0, 0, 1.0f);
+    m.set(0, 1, 5.0f);
+    m.set(1, 0, -3.0f);
+    m.set(1, 1, 2.0f);
+
+    ASSERT_FLOAT_EQ(17.0f, m.determinant());
+
+    return true;
+}

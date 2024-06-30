@@ -32,6 +32,8 @@ public:
     Matrix<N> operator*(const Matrix<N> &m) const;
 
     void transpose();
+
+    float determinant() const;
 };
 
 #endif
