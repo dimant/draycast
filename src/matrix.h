@@ -42,6 +42,8 @@ public:
     float cofactor(size_t row, size_t col) const;
 
     bool invertible() const;
+
+    Matrix<N> inverse() const;
 };
 
 #endif

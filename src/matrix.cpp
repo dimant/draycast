@@ -96,9 +96,9 @@ float Matrix<2>::determinant() const
 template <>
 float Matrix<3>::determinant() const
 {
-    return data[0][0] * cofactor(0, 0) +
-           data[0][1] * cofactor(0, 1) +
-           data[0][2] * cofactor(0, 2);
+    return data[0][0] * (data[1][1] * data[2][2] - data[1][2] * data[2][1]) -
+           data[0][1] * (data[1][0] * data[2][2] - data[1][2] * data[2][0]) +
+           data[0][2] * (data[1][0] * data[2][1] - data[1][1] * data[2][0]);
 }
 
 template <>
@@ -167,4 +167,42 @@ template <size_t N>
 bool Matrix<N>::invertible() const
 {
     return fabs(determinant()) < EPSILON ? false : true;
+}
+
+template <>
+Matrix<2> Matrix<2>::inverse() const
+{
+    Matrix<2> result;
+
+    float det = determinant();
+
+    result.set(0, 0, data[1][1] / det);
+    result.set(0, 1, -data[0][1] / det);
+    result.set(1, 0, -data[1][0] / det);
+    result.set(1, 1, data[0][0] / det);
+
+    return result;
+}
+
+template Matrix<3> Matrix<3>::inverse() const;
+template Matrix<4> Matrix<4>::inverse() const;
+
+template <size_t N>
+Matrix<N> Matrix<N>::inverse() const
+{
+    Matrix<N> result;
+
+    float det = determinant();
+
+    for (size_t row = 0; row < N; row++)
+    {
+        for (size_t col = 0; col < N; col++)
+        {
+            float c = cofactor(row, col);
+
+            result.set(col, row, c / det);
+        }
+    }
+
+    return result;
 }

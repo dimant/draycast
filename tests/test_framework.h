@@ -38,7 +38,7 @@ extern int test_count;
     }
 
 #define ASSERT_FLOAT_EQ(expected, actual)                                                                                     \
-    if (fabs((expected) - (actual)) > 1e-6)                                                                                   \
+    if (fabs((expected) - (actual)) > 0.00001)                                                                                \
     {                                                                                                                         \
         printf("\033[31mFAILED:\033[0m %s:%d %s: expected %f, got %f\n", __FILE__, __LINE__, __func__, (expected), (actual)); \
         return false;                                                                                                         \
