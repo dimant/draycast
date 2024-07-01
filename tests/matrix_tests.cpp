@@ -732,7 +732,7 @@ TEST(transform_rotate_z)
     return true;
 }
 
-TEST(shearing)
+TEST(transform_shearing)
 {
     Matrix<4> transform = Matrix<4>()
         .shear(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -742,6 +742,25 @@ TEST(shearing)
     Tuple result = transform * p;
 
     ASSERT_TRUE(result == Tuple::point(5.0f, 3.0f, 4.0f));
+
+    return true;
+}
+
+TEST(transform_chain)
+{
+    Tuple p = Tuple::point(1.0f, 0.0f, 1.0f);
+
+    Matrix<4> a = Matrix<4>().rotate_x(M_PI / 2.0f);
+    Matrix<4> b = Matrix<4>().scale(5.0f, 5.0f, 5.0f);
+    Matrix<4> c = Matrix<4>().translate(10.0f, 5.0f, 7.0f);
+
+    Tuple p2 = a * p;
+    Tuple p3 = b * p2;
+    Tuple p4 = c * p3;
+
+    ASSERT_TRUE(p2 == Tuple::point(1.0f, -1.0f, 0.0f));
+    ASSERT_TRUE(p3 == Tuple::point(5.0f, -5.0f, 0.0f));
+    ASSERT_TRUE(p4 == Tuple::point(15.0f, 0.0f, 7.0f));
 
     return true;
 }
