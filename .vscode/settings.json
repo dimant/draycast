@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "tuple": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "random": "cpp"
     }
 }

@@ -140,7 +140,7 @@ TEST(matrix4_mul_test)
 TEST(matrix4_identity_test)
 {
     Matrix<4> m;
-    Matrix<4> identity;
+    Matrix<4> identity = Matrix<4>::identity();
 
     for (size_t row = 0; row < 4; row++)
     {
@@ -149,8 +149,6 @@ TEST(matrix4_identity_test)
             m.set(row, col, (float) row * 4 + col);
 
         }
-
-        identity.set(row, row, 1.0f);
     }
 
     Matrix<4> result = m * identity;
@@ -632,7 +630,8 @@ TEST(matrix4_inverse_mul_test)
 
 TEST(transform_point_scale)
 {
-    Matrix<4> transform = Matrix<4>().scale(2.0f, 3.0f, 4.0f);
+    Matrix<4> transform = Matrix<4>::identity()
+        .scale(2.0f, 3.0f, 4.0f);
 
     Tuple p = Tuple::point(-4.0f, 6.0f, 8.0f);
 
@@ -645,7 +644,8 @@ TEST(transform_point_scale)
 
 TEST(transform_vector_scale)
 {
-    Matrix<4> transform = Matrix<4>().scale(2.0f, 3.0f, 4.0f);
+    Matrix<4> transform = Matrix<4>::identity()
+        .scale(2.0f, 3.0f, 4.0f);
 
     Tuple v = Tuple::vector(-4.0f, 6.0f, 8.0f);
 
@@ -658,7 +658,7 @@ TEST(transform_vector_scale)
 
 TEST(transform_vector_inverse_scale)
 {
-    Matrix<4> transform = Matrix<4>()
+    Matrix<4> transform = Matrix<4>::identity()
         .scale(2.0f, 3.0f, 4.0f)
         .inverse();
 
@@ -673,7 +673,8 @@ TEST(transform_vector_inverse_scale)
 
 TEST(transform_point_reflect)
 {
-    Matrix<4> transform = Matrix<4>().scale(-1.0f, 1.0f, 1.0f);
+    Matrix<4> transform = Matrix<4>::identity()
+        .scale(-1.0f, 1.0f, 1.0f);
 
     Tuple p = Tuple::point(2.0f, 3.0f, 4.0f);
 
@@ -688,8 +689,8 @@ TEST(transform_rotate_x)
 {
     Tuple p = Tuple::point(0.0f, 1.0f, 0.0f);
 
-    Matrix<4> half_quarter = Matrix<4>().rotate_x(M_PI / 4.0f);
-    Matrix<4> full_quarter = Matrix<4>().rotate_x(M_PI / 2.0f);
+    Matrix<4> half_quarter = Matrix<4>::identity().rotate_x(M_PI / 4.0f);
+    Matrix<4> full_quarter = Matrix<4>::identity().rotate_x(M_PI / 2.0f);
 
     Tuple result1 = half_quarter * p;
     Tuple result2 = full_quarter * p;
@@ -704,8 +705,8 @@ TEST(transform_rotate_y)
 {
     Tuple p = Tuple::point(0.0f, 0.0f, 1.0f);
 
-    Matrix<4> half_quarter = Matrix<4>().rotate_y(M_PI / 4.0f);
-    Matrix<4> full_quarter = Matrix<4>().rotate_y(M_PI / 2.0f);
+    Matrix<4> half_quarter = Matrix<4>::identity().rotate_y(M_PI / 4.0f);
+    Matrix<4> full_quarter = Matrix<4>::identity().rotate_y(M_PI / 2.0f);
 
     Tuple result1 = half_quarter * p;
     Tuple result2 = full_quarter * p;
@@ -720,8 +721,8 @@ TEST(transform_rotate_z)
 {
     Tuple p = Tuple::point(0.0f, 1.0f, 0.0f);
 
-    Matrix<4> half_quarter = Matrix<4>().rotate_z(M_PI / 4.0f);
-    Matrix<4> full_quarter = Matrix<4>().rotate_z(M_PI / 2.0f);
+    Matrix<4> half_quarter = Matrix<4>::identity().rotate_z(M_PI / 4.0f);
+    Matrix<4> full_quarter = Matrix<4>::identity().rotate_z(M_PI / 2.0f);
 
     Tuple result1 = half_quarter * p;
     Tuple result2 = full_quarter * p;
@@ -734,7 +735,7 @@ TEST(transform_rotate_z)
 
 TEST(transform_shearing)
 {
-    Matrix<4> transform = Matrix<4>()
+    Matrix<4> transform = Matrix<4>::identity()
         .shear(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
     Tuple p = Tuple::point(2.0f, 3.0f, 4.0f);
@@ -746,13 +747,13 @@ TEST(transform_shearing)
     return true;
 }
 
-TEST(transform_chain)
+TEST(transform_chain_multiplication)
 {
     Tuple p = Tuple::point(1.0f, 0.0f, 1.0f);
 
-    Matrix<4> a = Matrix<4>().rotate_x(M_PI / 2.0f);
-    Matrix<4> b = Matrix<4>().scale(5.0f, 5.0f, 5.0f);
-    Matrix<4> c = Matrix<4>().translate(10.0f, 5.0f, 7.0f);
+    Matrix<4> a = Matrix<4>::identity().rotate_x(M_PI / 2.0f);
+    Matrix<4> b = Matrix<4>::identity().scale(5.0f, 5.0f, 5.0f);
+    Matrix<4> c = Matrix<4>::identity().translate(10.0f, 5.0f, 7.0f);
 
     Tuple p2 = a * p;
     Tuple p3 = b * p2;
@@ -761,6 +762,22 @@ TEST(transform_chain)
     ASSERT_TRUE(p2 == Tuple::point(1.0f, -1.0f, 0.0f));
     ASSERT_TRUE(p3 == Tuple::point(5.0f, -5.0f, 0.0f));
     ASSERT_TRUE(p4 == Tuple::point(15.0f, 0.0f, 7.0f));
+
+    return true;
+}
+
+TEST(transform_chain_fluent)
+{
+    Tuple p = Tuple::point(1.0f, 0.0f, 1.0f);
+
+    Matrix<4> transform = Matrix<4>::identity()
+        .translate(10.0f, 5.0f, 7.0f)
+        .rotate_x(M_PI / 2.0f)
+        .scale(5.0f, 5.0f, 5.0f);
+
+    Tuple result = transform * p;
+
+    ASSERT_TRUE(result == Tuple::point(15.0f, 0.0f, 7.0f));
 
     return true;
 }

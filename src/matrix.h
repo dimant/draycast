@@ -47,19 +47,21 @@ public:
 
     bool invertible() const;
 
+    static Matrix<N> identity();
+
     Matrix<N> inverse() const;
 
-    static Matrix<N> translate(float x, float y, float z);
+    Matrix<N> translate(float x, float y, float z);
 
-    static Matrix<N> scale(float x, float y, float z);
+    Matrix<N> scale(float x, float y, float z);
 
-    static Matrix<N> rotate_x(float radians);
+    Matrix<N> rotate_x(float radians);
 
-    static Matrix<N> rotate_y(float radians);
+    Matrix<N> rotate_y(float radians);
 
-    static Matrix<N> rotate_z(float radians);
+    Matrix<N> rotate_z(float radians);
 
-    static Matrix<N> shear(float xy, float xz, float yx, float yz, float zx, float zy);
+    Matrix<N> shear(float xy, float xz, float yx, float yz, float zx, float zy);
 };
 
 #endif

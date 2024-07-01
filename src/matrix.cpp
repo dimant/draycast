@@ -220,6 +220,23 @@ Tuple Matrix<4>::operator*(const Tuple &t) const
     return result;
 }
 
+template Matrix<4> Matrix<4>::identity();
+template Matrix<3> Matrix<3>::identity();
+template Matrix<2> Matrix<2>::identity();
+
+template <size_t N>
+Matrix<N> Matrix<N>::identity()
+{
+    Matrix<N> result;
+
+    for (size_t row = 0; row < N; row++)
+    {
+        result.set(row, row, 1.0f);
+    }
+
+    return result;
+}
+
 template <>
 Matrix<4> Matrix<4>::translate(float x, float y, float z)
 {
@@ -234,7 +251,7 @@ Matrix<4> Matrix<4>::translate(float x, float y, float z)
     t.set(1, 3, y);
     t.set(2, 3, z);
 
-    return t;
+    return (*this) * t;
 }
 
 template <>
@@ -247,7 +264,7 @@ Matrix<4> Matrix<4>::scale(float x, float y, float z)
     s.set(2, 2, z);
     s.set(3, 3, 1);
 
-    return s;
+    return (*this) * s;
 }
 
 template <>
@@ -262,7 +279,7 @@ Matrix<4> Matrix<4>::rotate_x(float radians)
     r.set(2, 2, cos(radians));
     r.set(3, 3, 1);
 
-    return r;
+    return (*this) * r;
 }
 
 template <>
@@ -277,7 +294,7 @@ Matrix<4> Matrix<4>::rotate_y(float radians)
     r.set(2, 2, cos(radians));
     r.set(3, 3, 1);
 
-    return r;
+    return (*this) * r;
 }
 
 template <>
@@ -292,7 +309,7 @@ Matrix<4> Matrix<4>::rotate_z(float radians)
     r.set(2, 2, 1);
     r.set(3, 3, 1);
 
-    return r;
+    return (*this) * r;
 }
 
 template <>
@@ -311,5 +328,5 @@ Matrix<4> Matrix<4>::shear(float xy, float xz, float yx, float yz, float zx, flo
     s.set(2, 2, 1);
     s.set(3, 3, 1);
 
-    return s;
+    return (*this) * s;
 }
