@@ -294,3 +294,22 @@ Matrix<4> Matrix<4>::rotate_z(float radians)
 
     return r;
 }
+
+template <>
+Matrix<4> Matrix<4>::shear(float xy, float xz, float yx, float yz, float zx, float zy)
+{
+    Matrix<4> s;
+
+    s.set(0, 0, 1);
+    s.set(0, 1, xy);
+    s.set(0, 2, xz);
+    s.set(1, 0, yx);
+    s.set(1, 1, 1);
+    s.set(1, 2, yz);
+    s.set(2, 0, zx);
+    s.set(2, 1, zy);
+    s.set(2, 2, 1);
+    s.set(3, 3, 1);
+
+    return s;
+}

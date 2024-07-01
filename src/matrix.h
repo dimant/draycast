@@ -58,6 +58,8 @@ public:
     static Matrix<N> rotate_y(float radians);
 
     static Matrix<N> rotate_z(float radians);
+
+    static Matrix<N> shear(float xy, float xz, float yx, float yz, float zx, float zy);
 };
 
 #endif

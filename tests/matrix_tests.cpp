@@ -630,7 +630,7 @@ TEST(matrix4_inverse_mul_test)
     return true;
 }
 
-TEST(point_scale)
+TEST(transform_point_scale)
 {
     Matrix<4> transform = Matrix<4>().scale(2.0f, 3.0f, 4.0f);
 
@@ -643,7 +643,7 @@ TEST(point_scale)
     return true;
 }
 
-TEST(vector_scale)
+TEST(transform_vector_scale)
 {
     Matrix<4> transform = Matrix<4>().scale(2.0f, 3.0f, 4.0f);
 
@@ -656,7 +656,7 @@ TEST(vector_scale)
     return true;
 }
 
-TEST(vector_inverse_scale)
+TEST(transform_vector_inverse_scale)
 {
     Matrix<4> transform = Matrix<4>()
         .scale(2.0f, 3.0f, 4.0f)
@@ -671,7 +671,7 @@ TEST(vector_inverse_scale)
     return true;
 }
 
-TEST(point_reflect)
+TEST(transform_point_reflect)
 {
     Matrix<4> transform = Matrix<4>().scale(-1.0f, 1.0f, 1.0f);
 
@@ -680,6 +680,68 @@ TEST(point_reflect)
     Tuple result = transform * p;
 
     ASSERT_TRUE(result == Tuple::point(-2.0f, 3.0f, 4.0f));
+
+    return true;
+}
+
+TEST(transform_rotate_x)
+{
+    Tuple p = Tuple::point(0.0f, 1.0f, 0.0f);
+
+    Matrix<4> half_quarter = Matrix<4>().rotate_x(M_PI / 4.0f);
+    Matrix<4> full_quarter = Matrix<4>().rotate_x(M_PI / 2.0f);
+
+    Tuple result1 = half_quarter * p;
+    Tuple result2 = full_quarter * p;
+
+    ASSERT_TRUE(result1 == Tuple::point(0.0f, sqrt(2.0f) / 2.0f, sqrt(2.0f) / 2.0f));
+    ASSERT_TRUE(result2 == Tuple::point(0.0f, 0.0f, 1.0f));
+
+    return true;
+}
+
+TEST(transform_rotate_y)
+{
+    Tuple p = Tuple::point(0.0f, 0.0f, 1.0f);
+
+    Matrix<4> half_quarter = Matrix<4>().rotate_y(M_PI / 4.0f);
+    Matrix<4> full_quarter = Matrix<4>().rotate_y(M_PI / 2.0f);
+
+    Tuple result1 = half_quarter * p;
+    Tuple result2 = full_quarter * p;
+
+    ASSERT_TRUE(result1 == Tuple::point(sqrt(2.0f) / 2.0f, 0.0f, sqrt(2.0f) / 2.0f));
+    ASSERT_TRUE(result2 == Tuple::point(1.0f, 0.0f, 0.0f));
+
+    return true;
+}
+
+TEST(transform_rotate_z)
+{
+    Tuple p = Tuple::point(0.0f, 1.0f, 0.0f);
+
+    Matrix<4> half_quarter = Matrix<4>().rotate_z(M_PI / 4.0f);
+    Matrix<4> full_quarter = Matrix<4>().rotate_z(M_PI / 2.0f);
+
+    Tuple result1 = half_quarter * p;
+    Tuple result2 = full_quarter * p;
+
+    ASSERT_TRUE(result1 == Tuple::point(-sqrt(2.0f) / 2.0f, sqrt(2.0f) / 2.0f, 0.0f));
+    ASSERT_TRUE(result2 == Tuple::point(-1.0f, 0.0f, 0.0f));
+
+    return true;
+}
+
+TEST(shearing)
+{
+    Matrix<4> transform = Matrix<4>()
+        .shear(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+
+    Tuple p = Tuple::point(2.0f, 3.0f, 4.0f);
+
+    Tuple result = transform * p;
+
+    ASSERT_TRUE(result == Tuple::point(5.0f, 3.0f, 4.0f));
 
     return true;
 }
