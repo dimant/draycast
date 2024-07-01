@@ -206,3 +206,91 @@ Matrix<N> Matrix<N>::inverse() const
 
     return result;
 }
+
+template <>
+Tuple Matrix<4>::operator*(const Tuple &t) const
+{
+    Tuple result;
+
+    result.x = data[0][0] * t.x + data[0][1] * t.y + data[0][2] * t.z + data[0][3] * t.w;
+    result.y = data[1][0] * t.x + data[1][1] * t.y + data[1][2] * t.z + data[1][3] * t.w;
+    result.z = data[2][0] * t.x + data[2][1] * t.y + data[2][2] * t.z + data[2][3] * t.w;
+    result.w = data[3][0] * t.x + data[3][1] * t.y + data[3][2] * t.z + data[3][3] * t.w;
+
+    return result;
+}
+
+template <>
+Matrix<4> Matrix<4>::translate(float x, float y, float z)
+{
+    Matrix<4> t;
+
+    t.set(0, 0, 1);
+    t.set(1, 1, 1);
+    t.set(2, 2, 1);
+    t.set(3, 3, 1);
+
+    t.set(0, 3, x);
+    t.set(1, 3, y);
+    t.set(2, 3, z);
+
+    return t;
+}
+
+template <>
+Matrix<4> Matrix<4>::scale(float x, float y, float z)
+{
+    Matrix<4> s;
+
+    s.set(0, 0, x);
+    s.set(1, 1, y);
+    s.set(2, 2, z);
+    s.set(3, 3, 1);
+
+    return s;
+}
+
+template <>
+Matrix<4> Matrix<4>::rotate_x(float radians)
+{
+    Matrix<4> r;
+
+    r.set(0, 0, 1);
+    r.set(1, 1, cos(radians));
+    r.set(1, 2, -sin(radians));
+    r.set(2, 1, sin(radians));
+    r.set(2, 2, cos(radians));
+    r.set(3, 3, 1);
+
+    return r;
+}
+
+template <>
+Matrix<4> Matrix<4>::rotate_y(float radians)
+{
+    Matrix<4> r;
+
+    r.set(0, 0, cos(radians));
+    r.set(0, 2, sin(radians));
+    r.set(1, 1, 1);
+    r.set(2, 0, -sin(radians));
+    r.set(2, 2, cos(radians));
+    r.set(3, 3, 1);
+
+    return r;
+}
+
+template <>
+Matrix<4> Matrix<4>::rotate_z(float radians)
+{
+    Matrix<4> r;
+
+    r.set(0, 0, cos(radians));
+    r.set(0, 1, -sin(radians));
+    r.set(1, 0, sin(radians));
+    r.set(1, 1, cos(radians));
+    r.set(2, 2, 1);
+    r.set(3, 3, 1);
+
+    return r;
+}

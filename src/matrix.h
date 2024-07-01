@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+#include "tuple.h"
+
 template <size_t N>
 class Matrix
 {
@@ -31,6 +33,8 @@ public:
 
     Matrix<N> operator*(const Matrix<N> &m) const;
 
+    Tuple operator*(const Tuple &t) const;
+
     void transpose();
 
     float determinant() const;
@@ -44,6 +48,16 @@ public:
     bool invertible() const;
 
     Matrix<N> inverse() const;
+
+    static Matrix<N> translate(float x, float y, float z);
+
+    static Matrix<N> scale(float x, float y, float z);
+
+    static Matrix<N> rotate_x(float radians);
+
+    static Matrix<N> rotate_y(float radians);
+
+    static Matrix<N> rotate_z(float radians);
 };
 
 #endif

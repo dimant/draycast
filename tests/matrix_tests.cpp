@@ -1,5 +1,6 @@
 #include "test_framework.h"
 
+#include "../src/tuple.h"
 #include "../src/matrix.h"
 
 TEST(matrix4_access_test)
@@ -625,6 +626,60 @@ TEST(matrix4_inverse_mul_test)
     Matrix<4> d = c * b.inverse();
 
     ASSERT_TRUE(a == d);
+
+    return true;
+}
+
+TEST(point_scale)
+{
+    Matrix<4> transform = Matrix<4>().scale(2.0f, 3.0f, 4.0f);
+
+    Tuple p = Tuple::point(-4.0f, 6.0f, 8.0f);
+
+    Tuple result = transform * p;
+
+    ASSERT_TRUE(result == Tuple::point(-8.0f, 18.0f, 32.0f));
+
+    return true;
+}
+
+TEST(vector_scale)
+{
+    Matrix<4> transform = Matrix<4>().scale(2.0f, 3.0f, 4.0f);
+
+    Tuple v = Tuple::vector(-4.0f, 6.0f, 8.0f);
+
+    Tuple result = transform * v;
+
+    ASSERT_TRUE(result == Tuple::vector(-8.0f, 18.0f, 32.0f));
+
+    return true;
+}
+
+TEST(vector_inverse_scale)
+{
+    Matrix<4> transform = Matrix<4>()
+        .scale(2.0f, 3.0f, 4.0f)
+        .inverse();
+
+    Tuple v = Tuple::vector(-4.0f, 6.0f, 8.0f);
+
+    Tuple result = transform * v;
+
+    ASSERT_TRUE(result == Tuple::vector(-2.0f, 2.0f, 2.0f));
+
+    return true;
+}
+
+TEST(point_reflect)
+{
+    Matrix<4> transform = Matrix<4>().scale(-1.0f, 1.0f, 1.0f);
+
+    Tuple p = Tuple::point(2.0f, 3.0f, 4.0f);
+
+    Tuple result = transform * p;
+
+    ASSERT_TRUE(result == Tuple::point(-2.0f, 3.0f, 4.0f));
 
     return true;
 }

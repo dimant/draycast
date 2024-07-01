@@ -20,6 +20,16 @@ public:
 
     Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
+    static Tuple point(float x, float y, float z)
+    {
+        return Tuple(x, y, z, 1.0);
+    }
+
+    static Tuple vector(float x, float y, float z)
+    {
+        return Tuple(x, y, z, 0.0);
+    }
+
     Tuple operator+(const Tuple &t) const
     {
         return Tuple(x + t.x, y + t.y, z + t.z, w + t.w);
@@ -104,7 +114,7 @@ public:
         return w == 1.0;
     }
 
-    bool is_vec() const
+    bool is_vector() const
     {
         return w == 0.0;
     }

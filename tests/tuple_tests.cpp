@@ -11,12 +11,12 @@ TEST(is_point_test)
     ASSERT_FLOAT_EQ(p.z, 3.1);
     ASSERT_FLOAT_EQ(p.w, 1.0);
     ASSERT_TRUE(p.is_point());
-    ASSERT_FALSE(p.is_vec());
+    ASSERT_FALSE(p.is_vector());
 
     return true;
 }
 
-TEST(is_vec_test)
+TEST(is_vector_test)
 {
     Tuple v(4.3, -4.2, 3.1, 0.0);
 
@@ -24,7 +24,7 @@ TEST(is_vec_test)
     ASSERT_FLOAT_EQ(v.y, -4.2);
     ASSERT_FLOAT_EQ(v.z, 3.1);
     ASSERT_FLOAT_EQ(v.w, 0.0);
-    ASSERT_TRUE(v.is_vec());
+    ASSERT_TRUE(v.is_vector());
     ASSERT_FALSE(v.is_point());
 
     return true;
@@ -63,7 +63,7 @@ TEST(tuple_sub_test)
     Tuple expected(-2.0, -4.0, -6.0, 0.0);
 
     ASSERT_TRUE(c == expected);
-    ASSERT_TRUE(c.is_vec());
+    ASSERT_TRUE(c.is_vector());
 
     return true;
 }
