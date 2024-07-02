@@ -25,6 +25,11 @@ public:
         return Tuple(x, y, z, 1.0);
     }
 
+    static Tuple color(float r, float g, float b)
+    {
+        return Tuple(r, g, b, 0.0);
+    }
+
     static Tuple vector(float x, float y, float z)
     {
         return Tuple(x, y, z, 0.0);
