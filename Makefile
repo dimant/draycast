@@ -12,7 +12,7 @@ TEST_TARGET = testme
 SRCS = src/canvas.cpp src/ppm.cpp src/matrix.cpp
 
 TEST_SRCS = tests/dummy_tests.cpp tests/tuple_tests.cpp tests/canvas_tests.cpp tests/ppm_tests.cpp \
-	tests/matrix_tests.cpp
+	tests/matrix_tests.cpp tests/ray_tests.cpp
 
 # Define the object files
 OBJS = $(SRCS:.cpp=.o)
