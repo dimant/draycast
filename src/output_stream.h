@@ -9,7 +9,7 @@
 class OutputStream
 {
 public:
-    virtual ~OutputStream() = default;
+    virtual ~OutputStream() { }
     virtual OutputStream &operator<<(const std::string &str) = 0;
 };
 
@@ -31,7 +31,7 @@ public:
         outfile.close();
     }
 
-    OutputStream &operator<<(const std::string &str) override
+    OutputStream &operator<<(const std::string &str)
     {
         outfile << str;
         return *this;
@@ -43,7 +43,7 @@ class MemoryOutputStream : public OutputStream
     std::ostringstream oss;
 
 public:
-    OutputStream &operator<<(const std::string &str) override
+    OutputStream &operator<<(const std::string &str)
     {
         oss << str;
         return *this;

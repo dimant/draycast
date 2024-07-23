@@ -8,9 +8,14 @@
 class PPM
 {
 private:
-    int pixels_on_line = 0;
+    int pixels_on_line;
 
 public:
+	PPM()
+	{
+		pixels_on_line = 0;
+	}
+
     void write_header(OutputStream &str, const int &width, const int &height);
 
     void write_pixel(OutputStream &str, const Tuple &c);
